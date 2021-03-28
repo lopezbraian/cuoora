@@ -20,6 +20,12 @@ UsuarioC class >> new: aUser conPass: aPass [
 		pass: aPass
 ]
 
+{ #category : #'as yet unclassified' }
+UsuarioC >> agregarTopicoDeInteres: aTopico [
+
+topicos add: aTopico
+]
+
 { #category : #accessing }
 UsuarioC >> fechaDeCreacion [
 	^ creacion
@@ -27,19 +33,21 @@ UsuarioC >> fechaDeCreacion [
 
 { #category : #initialization }
 UsuarioC >> initialize [
-	super initialize .
-	creacion := Date today.
-	followers := OrderedCollection new
-]
-
-{ #category : #accessing }
-UsuarioC >> pass [
-	^ pass
+	super initialize.
+	creacion := DateAndTime now.
+	followers := OrderedCollection new.
+	topicos := OrderedCollection new.
 ]
 
 { #category : #accessing }
 UsuarioC >> pass: anObject [
 	pass := anObject
+]
+
+{ #category : #'as yet unclassified' }
+UsuarioC >> topicos [
+
+^topicos
 ]
 
 { #category : #accessing }
