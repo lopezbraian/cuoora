@@ -3,21 +3,16 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'usuarios',
-		'topicos',
-		'preguntas'
+		'topicos'
 	],
 	#category : #'Objetos2-CuOOra-Model'
 }
 
 { #category : #'as yet unclassified' }
-CuOOra >> agregarFollowerA: aUsuario seguidoPor: aUsuario2 [
-	aUsuario agregarFollower: aUsuario2.
-	aUsuario2 agregarFollowed: aUsuario.
-	
-]
+CuOOra >> agregarPreguntaConTitulo: aTitle Descripcion: aText Topicos: aTopico de: aUsuario [
 
-{ #category : #'as yet unclassified' }
-CuOOra >> agregarPreguntaConTitulo: aTitle Descripcion: aText Topicos: aTopico de: aUsuarioC [
+aUsuario preguntas: (Pregunta newConTitulo: aTitle descripcion: aText  topico: aTopico  from: aUsuario )
+	
 ]
 
 { #category : #'as yet unclassified' }
@@ -34,8 +29,8 @@ CuOOra >> agregarTopico: aName conDescripcion: aText [
 
 { #category : #'as yet unclassified' }
 CuOOra >> borrarPregunta: aPregunta [
-
-preguntas remove: aPregunta "ver como seria si lo implementamos dentro de los usuarios"
+	(self
+		preguntasDe: aPregunta user)remove: aPregunta
 ]
 
 { #category : #'as yet unclassified' }
@@ -50,9 +45,7 @@ CuOOra >> obtenerRespuestaAPregunta: aPregunta [
 
 { #category : #'as yet unclassified' }
 CuOOra >> preguntasDe: aUsuario [
-	^preguntas select: [ :each | each user = aUsuario ]
-	
-"Si las preguntas las ponemos dentro de los usuarios seria aUsuario preguntas."
+	^ aUsuario preguntas
 ]
 
 { #category : #'as yet unclassified' }
@@ -64,4 +57,10 @@ CuOOra >> puntajeDe: aUsuario [
 { #category : #'as yet unclassified' }
 CuOOra >> registrarTopico: aTopico A: aUsuario [ 
 	aUsuario agregarTopicoDeInteres: aTopico 
+]
+
+{ #category : #'as yet unclassified' }
+CuOOra >> seguirA: aUsuario Por: aUsuario2 [
+	
+	aUsuario2 serFollowerDe: aUsuario
 ]

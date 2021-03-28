@@ -5,9 +5,9 @@ Class {
 		'user',
 		'pass',
 		'creacion',
-		'followers',
-		'followed',
-		'topicos'
+		'seguidos',
+		'topicos',
+		'preguntas'
 	],
 	#category : #'Objetos2-CuOOra-Model'
 }
@@ -19,17 +19,6 @@ UsuarioC class >> new: aUser conPass: aPass [
 	^u
 		usuario: aUser;
 		pass: aPass
-]
-
-{ #category : #'as yet unclassified' }
-UsuarioC >> agregarFollowed: aUsuario [
-	followed add: aUsuario
-]
-
-{ #category : #'as yet unclassified' }
-UsuarioC >> agregarFollower: aUsuario [ 
-
-followers add: aUsuario 
 ]
 
 { #category : #'as yet unclassified' }
@@ -47,13 +36,29 @@ UsuarioC >> fechaDeCreacion [
 UsuarioC >> initialize [
 	super initialize.
 	creacion := DateAndTime now.
-	followers := OrderedCollection new.
+	seguidos := OrderedCollection new.
 	topicos := OrderedCollection new.
+	preguntas:= OrderedCollection new
 ]
 
 { #category : #accessing }
 UsuarioC >> pass: anObject [
 	pass := anObject
+]
+
+{ #category : #accessing }
+UsuarioC >> preguntas [
+	^ preguntas
+]
+
+{ #category : #accessing }
+UsuarioC >> preguntas: aPregunta [ 
+	preguntas add: aPregunta 
+]
+
+{ #category : #'as yet unclassified' }
+UsuarioC >> serFollowerDe: aUsuario [
+	seguidos add: aUsuario
 ]
 
 { #category : #'as yet unclassified' }
