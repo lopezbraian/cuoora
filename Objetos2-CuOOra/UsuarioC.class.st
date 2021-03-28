@@ -6,6 +6,7 @@ Class {
 		'pass',
 		'creacion',
 		'followers',
+		'followed',
 		'topicos'
 	],
 	#category : #'Objetos2-CuOOra-Model'
@@ -18,6 +19,17 @@ UsuarioC class >> new: aUser conPass: aPass [
 	^u
 		usuario: aUser;
 		pass: aPass
+]
+
+{ #category : #'as yet unclassified' }
+UsuarioC >> agregarFollowed: aUsuario [
+	followed add: aUsuario
+]
+
+{ #category : #'as yet unclassified' }
+UsuarioC >> agregarFollower: aUsuario [ 
+
+followers add: aUsuario 
 ]
 
 { #category : #'as yet unclassified' }
