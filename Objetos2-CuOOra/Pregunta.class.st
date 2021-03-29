@@ -1,3 +1,7 @@
+"
+Representa a una Pregunta de Cuoora que hereda de Entrada
+Instance var titulo topicos rtas
+"
 Class {
 	#name : #Pregunta,
 	#superclass : #Entrada,

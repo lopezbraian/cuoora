@@ -1,3 +1,10 @@
+"
+Representa una Entrada a la red cuoora
+
+
+
+Instance var descr creacion user calificaciones
+"
 Class {
 	#name : #Entrada,
 	#superclass : #Object,
@@ -9,6 +16,12 @@ Class {
 	],
 	#category : #'Objetos2-CuOOra-Model'
 }
+
+{ #category : #'as yet unclassified' }
+Entrada >> aCalifacion:aCalif from:aUsuario [
+
+calificaciones add: (Calificacion newFrom:  aUsuario like: aCalif )
+]
 
 { #category : #accessing }
 Entrada >> calificaciones [
@@ -41,6 +54,16 @@ Entrada >> initialize [
 super initialize .
 creacion := DateAndTime now.
 calificaciones := OrderedCollection new.
+]
+
+{ #category : #testing }
+Entrada >> isLikedFrom:aUsuario [
+
+|calif|
+
+calif:= self calificaciones find: aUsuario.
+
+^calif.
 ]
 
 { #category : #accessing }

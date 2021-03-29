@@ -1,3 +1,9 @@
+"
+Representa una Califacion para una entradas 
+
+
+Instance var creacion user like
+"
 Class {
 	#name : #Calificacion,
 	#superclass : #Object,

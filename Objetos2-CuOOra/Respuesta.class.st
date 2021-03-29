@@ -1,3 +1,7 @@
+"
+Representa a una Respuesta de Cuoora que hereda de Entrada
+Instance var pregunta
+"
 Class {
 	#name : #Respuesta,
 	#superclass : #Entrada,
@@ -8,10 +12,14 @@ Class {
 }
 
 { #category : #'instance creation' }
-Respuesta class >> newConDescripcion: aText from: aUsuario [
+Respuesta class >> newPreguntaConcontenido:aText from:aUsuario [
 
 |r|
+r:= self new.
+r content: aText ; user: aUsuario.
+]
 
-r:=self new.
-r descr: aText; user: aUsuario 
+{ #category : #accessing }
+Respuesta >> pregunta [
+	^pregunta
 ]

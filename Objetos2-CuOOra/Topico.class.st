@@ -1,3 +1,7 @@
+"
+Representa a un Topico de Cuoora
+Instance var nombre descripcion
+"
 Class {
 	#name : #Topico,
 	#superclass : #Object,
@@ -13,7 +17,7 @@ Topico class >> nombre: aName descripcion: aText [
 |t|
 
 t:=self new.
-^t name: aName; descripcion: aText 
+^t nombre: aName; descripcion: aText 
 ]
 
 { #category : #accessing }

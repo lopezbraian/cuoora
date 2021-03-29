@@ -1,3 +1,8 @@
+"
+Representa una Red Social De Preguntas y respuestas
+
+Instance var usuarios topicos
+"
 Class {
 	#name : #CuOOra,
 	#superclass : #Object,
@@ -7,20 +12,6 @@ Class {
 	],
 	#category : #'Objetos2-CuOOra-Model'
 }
-
-{ #category : #'as yet unclassified' }
-CuOOra >> agregarPreguntaConTitulo: aTitle Descripcion: aText Topicos: aTopico de: aUsuario [
-
-aUsuario preguntas: (Pregunta newConTitulo: aTitle descripcion: aText  topico: aTopico  from: aUsuario )
-	
-]
-
-{ #category : #'as yet unclassified' }
-CuOOra >> agregarRespuestaAPregunta: aPregunta descripcion: aText from: aUsuario [
-
-aPregunta agregarRespuesta: (Respuesta newConDescripcion: aText from: aUsuario )
-	
-]
 
 { #category : #'as yet unclassified' }
 CuOOra >> agregarTopico: aName conDescripcion: aText [
@@ -35,7 +26,18 @@ CuOOra >> borrarPregunta: aPregunta [
 
 { #category : #'as yet unclassified' }
 CuOOra >> crearUsuario: aUser conPass: aPass [
-	usuarios add: (UsuarioC new: aUser conPass: aPass)
+	|user|
+	user:= UsuarioC new: aUser conPass: aPass.
+	usuarios add: user.
+	^user.
+]
+
+{ #category : #initialization }
+CuOOra >> initialize [ 
+	super initialize.
+	
+	usuarios:= OrderedCollection new.
+	topicos:= OrderedCollection new.
 ]
 
 { #category : #'as yet unclassified' }
