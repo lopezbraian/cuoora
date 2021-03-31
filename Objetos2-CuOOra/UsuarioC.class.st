@@ -58,6 +58,13 @@ UsuarioC >> initialize [
 	preguntas := OrderedCollection new
 ]
 
+{ #category : #'as yet unclassified' }
+UsuarioC >> obtenerPreguntasDeTopico: aTopico [
+	"De la coleccion de preguntas selecciona los que tienen preguntas que cumplan con el topico solicitado"
+
+	^ preguntas 	flatCollect: [ :each | each topicos flatCollect: [ :topico | topico = aTopico ] ]
+]
+
 { #category : #accessing }
 UsuarioC >> pass: anObject [
 	pass := anObject
@@ -71,6 +78,11 @@ UsuarioC >> preguntas [
 { #category : #accessing }
 UsuarioC >> preguntas: aEntrada [
 	preguntas add: aEntrada
+]
+
+{ #category : #accessing }
+UsuarioC >> seguidos [
+	^ seguidos
 ]
 
 { #category : #'as yet unclassified' }

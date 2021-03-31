@@ -42,7 +42,26 @@ CuOOra >> initialize [
 
 { #category : #'as yet unclassified' }
 CuOOra >> obtenerPreguntasDeTopico: aTopico [
-	^usuarios flatCollect: [ :each | each preguntas topicos = aTopico ]
+	"De la coleccion de usuarios selecciona los que tienen preguntas que cumplan con el topico solicitado"
+
+	^ usuarios
+		flatCollect: [ :each | each obtenerPreguntasDeTopico: aTopico ] .
+]
+
+{ #category : #'as yet unclassified' }
+CuOOra >> obtenerPreguntasRelevantesPara: aUser [
+	"Se consideran relevantes las preguntas que pertenecen a los usuarios seguidos y a las que coinciden con los topicos de interes"
+|relevantes|
+relevantes:= OrderedCollection new.
+relevantes addAll:(	usuarios
+		flatCollect: [ :each | 
+			aUser topicos
+				flatCollect: [ :topico | each obtenerPreguntasDeTopico: topico ] ]).
+relevantes addAll:((usuarios
+		flatCollect: [ :each | aUser seguidos flatCollect: [ :seguidos | seguidos == each ] ])
+		flatCollect: [ :s | s preguntas ]).
+		
+^relevantes 
 ]
 
 { #category : #'as yet unclassified' }
