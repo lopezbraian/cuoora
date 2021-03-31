@@ -41,6 +41,11 @@ CuOOra >> initialize [
 ]
 
 { #category : #'as yet unclassified' }
+CuOOra >> obtenerPreguntasDeTopico: aTopico [
+	^usuarios flatCollect: [ :each | each preguntas topicos = aTopico ]
+]
+
+{ #category : #'as yet unclassified' }
 CuOOra >> obtenerRespuestaAPregunta: aPregunta [ 
 	aPregunta respuestas. "falta ver el tema del orden"
 ]
@@ -52,17 +57,11 @@ CuOOra >> preguntasDe: aUsuario [
 
 { #category : #'as yet unclassified' }
 CuOOra >> puntajeDe: aUsuario [
-
-	
+	^(self preguntasDe: aUsuario size*20)+(self respuestasDe: aUsuario size*50).
 ]
 
 { #category : #'as yet unclassified' }
-CuOOra >> registrarTopico: aTopico A: aUsuario [ 
-	aUsuario agregarTopicoDeInteres: aTopico 
-]
+CuOOra >> respuestasDe: aUsuario [ 
 
-{ #category : #'as yet unclassified' }
-CuOOra >> seguirA: aUsuario Por: aUsuario2 [
-	
-	aUsuario2 serFollowerDe: aUsuario
+^usuarios preguntas flatCollect: [ :each | each respuestas user == aUsuario ].
 ]

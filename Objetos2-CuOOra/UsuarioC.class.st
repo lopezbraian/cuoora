@@ -10,7 +10,7 @@ Class {
 		'creacion',
 		'seguidos',
 		'topicos',
-		'entradas'
+		'preguntas'
 	],
 	#category : #'Objetos2-CuOOra-Model'
 }
@@ -27,7 +27,7 @@ UsuarioC class >> new: aUser conPass: aPass [
 { #category : #'as yet unclassified' }
 UsuarioC >> agregarPreguntaConTitulo: aTitle Descripcion: aText Topicos: aTopico [
 
-self entradas: (Pregunta newConTitulo: aTitle descripcion: aText  topico: aTopico  from: self )
+self preguntas: (Pregunta newConTitulo: aTitle descripcion: aText  topico: aTopico  from: self )
 	
 ]
 
@@ -45,16 +45,6 @@ topicos add: aTopico
 ]
 
 { #category : #accessing }
-UsuarioC >> entradas [
-	^ entradas
-]
-
-{ #category : #accessing }
-UsuarioC >> entradas: aEntrada [ 
-	entradas add: aEntrada 
-]
-
-{ #category : #accessing }
 UsuarioC >> fechaDeCreacion [
 	^ creacion
 ]
@@ -65,12 +55,22 @@ UsuarioC >> initialize [
 	creacion := DateAndTime now.
 	seguidos := OrderedCollection new.
 	topicos := OrderedCollection new.
-	entradas:= OrderedCollection new
+	preguntas := OrderedCollection new
 ]
 
 { #category : #accessing }
 UsuarioC >> pass: anObject [
 	pass := anObject
+]
+
+{ #category : #accessing }
+UsuarioC >> preguntas [
+	^ preguntas
+]
+
+{ #category : #accessing }
+UsuarioC >> preguntas: aEntrada [
+	preguntas add: aEntrada
 ]
 
 { #category : #'as yet unclassified' }
