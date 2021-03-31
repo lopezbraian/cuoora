@@ -18,9 +18,9 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-Entrada >> aCalifacion:aCalif from:aUsuario [
+Entrada >> aCalifacion:aBoolean  from:aUsuario [
 
-calificaciones add: (Calificacion newFrom:  aUsuario like: aCalif )
+calificaciones add: (Calificacion newFrom:  aUsuario like: aBoolean )
 ]
 
 { #category : #accessing }
