@@ -20,8 +20,7 @@ CuOOra >> agregarTopico: aName conDescripcion: aText [
 
 { #category : #'as yet unclassified' }
 CuOOra >> borrarPregunta: aPregunta [
-	(self
-		preguntasDe: aPregunta user)remove: aPregunta
+	(self preguntasDe: aPregunta user) borrarPregunta: aPregunta
 ]
 
 { #category : #'as yet unclassified' }
@@ -88,4 +87,10 @@ CuOOra >> respuestasDe: aUsuario [
 { #category : #accessing }
 CuOOra >> topicos [
 ^topicos.
+]
+
+{ #category : #accessing }
+CuOOra >> usuarios [
+
+^usuarios
 ]

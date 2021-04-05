@@ -50,9 +50,26 @@ UsuarioC >> agregarTopicoDeInteres: aTopico [
 topicos add: aTopico
 ]
 
+{ #category : #'as yet unclassified' }
+UsuarioC >> borrarPregunta: aPregunta [
+	preguntas remove: aPregunta
+]
+
+{ #category : #accessing }
+UsuarioC >> fecha [ 
+
+^creacion asDate 
+]
+
 { #category : #accessing }
 UsuarioC >> fechaDeCreacion [
 	^ creacion
+]
+
+{ #category : #accessing }
+UsuarioC >> hora [
+
+^ creacion asTime 
 ]
 
 { #category : #initialization }
