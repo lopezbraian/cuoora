@@ -43,6 +43,14 @@ UsuarioCTest >> testAgregarTopicoDeInteres [
 ]
 
 { #category : #tests }
+UsuarioCTest >> testBorrarPregunta [
+	| p |
+	p := user preguntas first.
+	user borrarPregunta: p.
+	self assert: user preguntas size equals: 0
+]
+
+{ #category : #tests }
 UsuarioCTest >> testSerFollower [
 	self assert: user seguidos first usuario equals: 'OO2'.
 	self assert: user seguidos size equals: 1

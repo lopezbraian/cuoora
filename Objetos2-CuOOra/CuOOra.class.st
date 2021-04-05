@@ -19,11 +19,6 @@ CuOOra >> agregarTopico: aName conDescripcion: aText [
 ]
 
 { #category : #'as yet unclassified' }
-CuOOra >> borrarPregunta: aPregunta [
-	(self preguntasDe: aPregunta user) borrarPregunta: aPregunta
-]
-
-{ #category : #'as yet unclassified' }
 CuOOra >> crearUsuario: aUser conPass: aPass [
 	|user|
 	user:= UsuarioC new: aUser conPass: aPass.

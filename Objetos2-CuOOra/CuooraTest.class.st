@@ -1,5 +1,5 @@
 Class {
-	#name : #CuooraTest,
+	#name : #CuOOraTest,
 	#superclass : #TestCase,
 	#instVars : [
 		'cuoora'
@@ -8,7 +8,7 @@ Class {
 }
 
 { #category : #running }
-CuooraTest >> setUp [
+CuOOraTest >> setUp [
 	"Hooks that subclasses may override to define the fixture of test."
 
 	cuoora := CuOOra new.
@@ -20,15 +20,14 @@ CuooraTest >> setUp [
 ]
 
 { #category : #tests }
-CuooraTest >> testAgregarTopicos [
-	
+CuOOraTest >> testAgregarTopicoconDescripcion [
 	self assert: cuoora topicos size equals: 1.
 	cuoora agregarTopico: 'Musica' conDescripcion: 'Topico Musica'.
 	self assert: cuoora topicos size equals: 2
 ]
 
 { #category : #'as yet unclassified' }
-CuooraTest >> testAgregarUsuario [
+CuOOraTest >> testCrearUsuarioConPass [
 	self assert: cuoora usuarios size equals: 1.
 	cuoora crearUsuario: 'maria' conPass: '12345'.
 	self assert: cuoora usuarios size equals: 2
