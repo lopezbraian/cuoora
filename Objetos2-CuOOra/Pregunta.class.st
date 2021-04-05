@@ -19,7 +19,7 @@ Pregunta class >> newConTitulo: aText descripcion: aText2 topico: aTopico from: 
 |p|
 
 p:= self new.
-p titulo: aText ; descr: aText2 ; topicos: aTopico ; user: aUsuario .
+^p titulo: aText ; descr: aText2 ; topicos: aTopico ; user: aUsuario .
 ]
 
 { #category : #accessing }

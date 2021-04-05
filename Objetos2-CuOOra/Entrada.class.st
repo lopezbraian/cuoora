@@ -18,9 +18,22 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-Entrada >> aCalifacion:aBoolean  from:aUsuario [
+Entrada >> aCalifacion:aBoolean from:aUsuario [
 
-calificaciones add: (Calificacion newFrom:  aUsuario like: aBoolean )
+|califPregunta existCalifUser|
+
+califPregunta := self calificaciones.
+
+existCalifUser:=califPregunta detect: [ :each | each user == aUsuario  ] ifNone: [ nil ].
+
+existCalifUser ifNotNil: [
+	"califPregunta do:[ :each | each user = aUsuario ifTrue: [ each cambiarValorLike:aBoolean ] ]"
+	existCalifUser cambiarValorLike:aBoolean.
+].
+
+existCalifUser ifNil: [ calificaciones add: (Calificacion newFrom:  aUsuario like: aBoolean ) ]
+
+
 ]
 
 { #category : #accessing }

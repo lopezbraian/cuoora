@@ -6,7 +6,8 @@ Class {
 	#name : #Respuesta,
 	#superclass : #Entrada,
 	#instVars : [
-		'pregunta'
+		'pregunta',
+		'content'
 	],
 	#category : #'Objetos2-CuOOra-Model'
 }
@@ -16,7 +17,19 @@ Respuesta class >> newPreguntaConcontenido:aText from:aUsuario [
 
 |r|
 r:= self new.
-r content: aText ; user: aUsuario.
+^r content: aText ; user: aUsuario.
+]
+
+{ #category : #accessing }
+Respuesta >> content [
+
+^content.
+]
+
+{ #category : #accessing }
+Respuesta >> content: aContent [.
+
+	content:=aContent.
 ]
 
 { #category : #accessing }

@@ -25,7 +25,7 @@ UsuarioC class >> new: aUser conPass: aPass [
 ]
 
 { #category : #'as yet unclassified' }
-UsuarioC >> agregarCalificacion:aBoolean aPregunta:aEntrada [
+UsuarioC >> agregarCalificacion:aBoolean aEntrada:aEntrada [
 
 aEntrada aCalifacion: aBoolean  from: self. 
 ]

@@ -21,7 +21,13 @@ Calificacion class >> newFrom: aUser like: aBool [
 |c|
 
 c:=self new.
-c user: aUser; like: aBool ; creacion: DateAndTime now.
+^c user: aUser; like: aBool ; creacion: DateAndTime now.
+]
+
+{ #category : #'as yet unclassified' }
+Calificacion >> cambiarValorLike [
+
+self like: (self like ifTrue: [ ^false ] ifFalse:[^true]). 
 ]
 
 { #category : #accessing }

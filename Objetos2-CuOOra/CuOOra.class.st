@@ -84,3 +84,8 @@ CuOOra >> respuestasDe: aUsuario [
 
 ^usuarios preguntas flatCollect: [ :each | each respuestas user == aUsuario ].
 ]
+
+{ #category : #accessing }
+CuOOra >> topicos [
+^topicos.
+]
