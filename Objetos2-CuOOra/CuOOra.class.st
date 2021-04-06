@@ -59,8 +59,8 @@ relevantes addAll:((usuarios
 ]
 
 { #category : #'as yet unclassified' }
-CuOOra >> obtenerRespuestaAPregunta: aPregunta [ 
-	aPregunta respuestas. "falta ver el tema del orden"
+CuOOra >> obtenerRespuestaAPregunta: aPregunta [
+	^aPregunta respuestas	asSortedCollection sortBlock: [ :p1 :p2| p1 puntaje >= p2 puntaje ].
 ]
 
 { #category : #'as yet unclassified' }
