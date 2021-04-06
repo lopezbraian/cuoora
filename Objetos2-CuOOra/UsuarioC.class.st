@@ -38,10 +38,9 @@ self preguntas: (Pregunta newConTitulo: aTitle descripcion: aText  topico: aTopi
 ]
 
 { #category : #'as yet unclassified' }
-UsuarioC >> agregarRespuestaAPregunta: aPregunta contenido: aText from: aUsuario [
-
-
-aPregunta agregarRespuesta: (Respuesta newPreguntaConcontenido: aText from: aUsuario )
+UsuarioC >> agregarRespuestaAPregunta: aPregunta contenido: aText [
+	aPregunta
+		agregarRespuesta: (Respuesta newPreguntaConcontenido: aText from: self)
 ]
 
 { #category : #'as yet unclassified' }
