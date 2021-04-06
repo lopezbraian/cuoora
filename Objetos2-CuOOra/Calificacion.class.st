@@ -24,12 +24,6 @@ c:=self new.
 ^c user: aUser; like: aBool ; creacion: DateAndTime now.
 ]
 
-{ #category : #'as yet unclassified' }
-Calificacion >> cambiarValorLike [
-
-self like: (self like ifTrue: [ ^false ] ifFalse:[^true]). 
-]
-
 { #category : #accessing }
 Calificacion >> creacion [
 	^ creacion
