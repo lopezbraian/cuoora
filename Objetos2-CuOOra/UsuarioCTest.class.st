@@ -41,6 +41,23 @@ user
 ]
 
 { #category : #tests }
+UsuarioCTest >> testAgregarCalificacion [
+	user agregarCalificacion: false aEntrada: user preguntas first.
+	
+	self assert: user preguntas first calificaciones  size equals: 1.
+	
+	"Se comprueba que el like es del usuario que lo dio"
+	self assert: user preguntas first calificaciones first  user equals: user.
+	
+	"Se comprueba que el valor de like corresponde"
+	self assert: user preguntas first calificaciones first  like equals: false.
+	
+	"Se cambia el like"
+	user agregarCalificacion: true aEntrada: user preguntas first.
+	self assert: user preguntas first calificaciones first  like equals: true.
+]
+
+{ #category : #tests }
 UsuarioCTest >> testAgregarRespuestaAPreguntaContenido [
 	self assert: user2 preguntas first respuestas size equals: 1.
 	self

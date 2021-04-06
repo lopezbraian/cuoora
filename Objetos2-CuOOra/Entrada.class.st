@@ -27,8 +27,7 @@ califPregunta := self calificaciones.
 existCalifUser:=califPregunta detect: [ :each | each user == aUsuario  ] ifNone: [ nil ].
 
 existCalifUser ifNotNil: [
-	"califPregunta do:[ :each | each user = aUsuario ifTrue: [ each cambiarValorLike:aBoolean ] ]"
-	existCalifUser cambiarValorLike:aBoolean.
+	existCalifUser like:aBoolean.
 ].
 
 existCalifUser ifNil: [ calificaciones add: (Calificacion newFrom:  aUsuario like: aBoolean ) ]
