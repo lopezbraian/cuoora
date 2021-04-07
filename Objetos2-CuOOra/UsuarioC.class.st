@@ -83,8 +83,16 @@ UsuarioC >> initialize [
 { #category : #'as yet unclassified' }
 UsuarioC >> obtenerPreguntasDeTopico: aTopico [
 	"De la coleccion de preguntas selecciona los que tienen preguntas que cumplan con el topico solicitado"
-
-	^ preguntas 	flatCollect: [ :each | each topicos flatCollect: [ :topico | topico = aTopico ] ]
+	
+	"No lo entendi, no pude hacerlo andar, si ves esto preguntame por wsp XD"
+	"----------------------------------------------------------------------------------------------"
+	"^ preguntas flatCollect: [ :each | each topicos flatCollect: [ :topico | topico = aTopico ] ]."
+	
+	| value |
+	^ preguntas do: [ :each | 
+			value := each topicos occurrencesOf: aTopico .
+			value = 1 ifTrue: [ ^ each ]. 
+		].
 ]
 
 { #category : #accessing }

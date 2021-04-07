@@ -50,3 +50,45 @@ CuOOraTest >> testCrearUsuarioConPass [
 	cuoora crearUsuario: 'maria' conPass: '12345'.
 	self assert: cuoora usuarios size equals: 2
 ]
+
+{ #category : #test }
+CuOOraTest >> testObtenerPreguntasDeTopico [
+
+	self flag: #toImplement.
+	self assert: false
+]
+
+{ #category : #test }
+CuOOraTest >> testObtenerPreguntasRelevantesPara [
+
+	self flag: #toImplement.
+	self assert: false
+]
+
+{ #category : #test }
+CuOOraTest >> testObtenerRespuestaAPregunta [
+
+	self flag: #toImplement.
+	self assert: false
+]
+
+{ #category : #test }
+CuOOraTest >> testPreguntasDe [
+
+	self flag: #toImplement.
+	self assert: false
+]
+
+{ #category : #test }
+CuOOraTest >> testPuntajeDe [
+
+	self flag: #toImplement.
+	self assert: false
+]
+
+{ #category : #test }
+CuOOraTest >> testRespuestasDe [
+
+	self flag: #toImplement.
+	self assert: false
+]

@@ -3,7 +3,9 @@ Class {
 	#superclass : #TestCase,
 	#instVars : [
 		'user',
-		'user2'
+		'user2',
+		'topicoMusica',
+		'topicoSeaside'
 	],
 	#category : #'Objetos2-CuOOra-Test'
 }
@@ -14,21 +16,22 @@ UsuarioCTest >> setUp [
 
 	user := UsuarioC new: 'pedro' conPass: '123456'.
 	user2 := UsuarioC new: 'maria' conPass: '123456'.
-
+	topicoMusica:= Topico nombre: 'Musica' descripcion: 'Topico de musica'.
+	topicoSeaside:= Topico nombre: 'Seaside' descripcion: 'Topico de Seaside'.
 	"______________NUEVA PREGUNTA______________"
 	user
 		agregarPreguntaConTitulo: 'Colecciones en pharo'
 		Descripcion: 'diferencias entre detect/includes'
-		Topicos: 'Pharo'.
+		Topicos: topicoMusica.
 	user2
 		agregarPreguntaConTitulo: 'Seaside'
 		Descripcion: 'que es seaside?'
-		Topicos: 'Seaside'.
+		Topicos: topicoSeaside.
 
 
 	"______________NUEVO TOPICO DE INTERES______________"
 	user
-		agregarTopicoDeInteres: (Topico nombre: 'Musica' descripcion: 'Topico de musica').
+		agregarTopicoDeInteres: (topicoMusica).
 
 	"______________SEGUIR A USUARIO______________"
 	user serFollowerDe: (UsuarioC new: 'OO2' conPass: '123456').
@@ -40,8 +43,9 @@ user
 	
 ]
 
-{ #category : #tests }
-UsuarioCTest >> testAgregarCalificacion [
+{ #category : #test }
+UsuarioCTest >> testAgregarCalificacionAEntrada [
+
 	user agregarCalificacion: false aEntrada: user preguntas first.
 	
 	self assert: user preguntas first calificaciones  size equals: 1.
@@ -79,6 +83,16 @@ UsuarioCTest >> testBorrarPregunta [
 	p := user preguntas first.
 	user borrarPregunta: p.
 	self assert: user preguntas size equals: 0
+]
+
+{ #category : #test }
+UsuarioCTest >> testObtenerPreguntasDeTopico [
+
+	|preguntasTopicoMusica|
+	
+	preguntasTopicoMusica := user obtenerPreguntasDeTopico: topicoMusica .
+	
+	self assert: preguntasTopicoMusica topicos first equals:topicoMusica.
 ]
 
 { #category : #tests }
