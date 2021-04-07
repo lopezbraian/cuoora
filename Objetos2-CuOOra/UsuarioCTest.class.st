@@ -92,7 +92,7 @@ UsuarioCTest >> testObtenerPreguntasDeTopico [
 	
 	preguntasTopicoMusica := user obtenerPreguntasDeTopico: topicoMusica .
 	
-	self assert: preguntasTopicoMusica topicos first equals:topicoMusica.
+	self assert: preguntasTopicoMusica first topicos first equals:topicoMusica.
 ]
 
 { #category : #tests }

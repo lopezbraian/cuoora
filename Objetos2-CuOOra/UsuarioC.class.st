@@ -88,11 +88,14 @@ UsuarioC >> obtenerPreguntasDeTopico: aTopico [
 	"----------------------------------------------------------------------------------------------"
 	"^ preguntas flatCollect: [ :each | each topicos flatCollect: [ :topico | topico = aTopico ] ]."
 	
-	| value |
-	^ preguntas do: [ :each | 
+	| value preguntasValidas |
+	
+	preguntasValidas := OrderedCollection new.
+	preguntas do: [ :each | 
 			value := each topicos occurrencesOf: aTopico .
-			value = 1 ifTrue: [ ^ each ]. 
+			value = 1 ifTrue: [ preguntasValidas add:each ]. 
 		].
+	^ preguntasValidas.
 ]
 
 { #category : #accessing }
