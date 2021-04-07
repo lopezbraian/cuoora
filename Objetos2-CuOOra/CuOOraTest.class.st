@@ -19,10 +19,11 @@ CuOOraTest >> setUp [
 	cuoora := CuOOra new.
 	cuoora crearUsuario: 'pedro' conPass: '12345'.
 	cuoora crearUsuario: 'maria' conPass: '12345'.
-	cuoora agregarTopico: 'Game' conDescripcion: 'Topico Juegos'.
+	cuoora agregarTopico: 'Juegos' conDescripcion: 'Topico Videojuegos' .
 	
 	pedro := cuoora usuarios first.
 	maria := cuoora usuarios last.
+	"-------------- CREAR TOPICOS ---------------"
 	topicoPharo:= Topico nombre: 'Pharo' descripcion: 'Topico de pharo'. 
 	topicoSeaside := Topico nombre: 'Seaside' descripcion: 'Topico de seaside'.
 	"--------------- AGREGAR PREGUNTAS -------------"
@@ -38,10 +39,15 @@ CuOOraTest >> setUp [
 		agregarPreguntaConTitulo: 'Seaside'
 		Descripcion: 'que es seaside?'
 		Topicos: topicoSeaside.
+		
+	"---------------- AGREGANDO TOPICOS DE INTERES ----------------"
 	pedro
 		agregarTopicoDeInteres: (Topico nombre: 'Musica' descripcion: 'Topico de musica').
+	
+	"---------------- AGREGANDO FOLLOWERS -----------------------"
 	pedro serFollowerDe: maria.
 	maria serFollowerDe: pedro.
+	"---------------- AGREGAR RESPUESTA --------------------"
 	pedro
 		agregarRespuestaAPregunta: maria preguntas first
 		contenido: 'Es un framework para realizar aplicaciones web'
@@ -71,9 +77,12 @@ CuOOraTest >> testObtenerPreguntasDeTopico [
 
 { #category : #test }
 CuOOraTest >> testObtenerPreguntasRelevantesPara [
-
-	self flag: #toImplement.
-	self assert: false
+	
+	|preguntasRev|
+	
+	preguntasRev := cuoora obtenerPreguntasRelevantesPara: pedro.
+	
+	^preguntasRev.
 ]
 
 { #category : #test }
