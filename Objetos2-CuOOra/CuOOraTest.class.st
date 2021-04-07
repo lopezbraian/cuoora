@@ -4,7 +4,9 @@ Class {
 	#instVars : [
 		'cuoora',
 		'pedro',
-		'maria'
+		'maria',
+		'topicoPharo',
+		'topicoSeaside'
 	],
 	#category : #'Objetos2-CuOOra-Test'
 }
@@ -16,18 +18,26 @@ CuOOraTest >> setUp [
 	
 	cuoora := CuOOra new.
 	cuoora crearUsuario: 'pedro' conPass: '12345'.
-	cuoora agregarTopico: 'Game' conDescripcion: 'Topico Juegos'.
 	cuoora crearUsuario: 'maria' conPass: '12345'.
+	cuoora agregarTopico: 'Game' conDescripcion: 'Topico Juegos'.
+	
 	pedro := cuoora usuarios first.
 	maria := cuoora usuarios last.
+	topicoPharo:= Topico nombre: 'Pharo' descripcion: 'Topico de pharo'. 
+	topicoSeaside := Topico nombre: 'Seaside' descripcion: 'Topico de seaside'.
+	"--------------- AGREGAR PREGUNTAS -------------"
 	pedro
 		agregarPreguntaConTitulo: 'Colecciones en pharo'
 		Descripcion: 'diferencias entre detect/includes'
-		Topicos: 'Pharo'.
+		Topicos: topicoPharo.
+	pedro
+		agregarPreguntaConTitulo: 'Variables en pharo'
+		Descripcion: 'Variables local o globales'
+		Topicos: topicoPharo.
 	maria
 		agregarPreguntaConTitulo: 'Seaside'
 		Descripcion: 'que es seaside?'
-		Topicos: 'Seaside'.
+		Topicos: topicoSeaside.
 	pedro
 		agregarTopicoDeInteres: (Topico nombre: 'Musica' descripcion: 'Topico de musica').
 	pedro serFollowerDe: maria.
@@ -40,22 +50,23 @@ CuOOraTest >> setUp [
 { #category : #tests }
 CuOOraTest >> testAgregarTopicoconDescripcion [
 	self assert: cuoora topicos size equals: 1.
-	cuoora agregarTopico: 'Musica' conDescripcion: 'Topico Musica'.
+	cuoora agregarTopico: 'Musica' conDescripcion:'Topico musica'.
 	self assert: cuoora topicos size equals: 2
 ]
 
 { #category : #tests }
 CuOOraTest >> testCrearUsuarioConPass [
-	self assert: cuoora usuarios size equals: 1.
+	self assert: cuoora usuarios size equals: 2.
 	cuoora crearUsuario: 'maria' conPass: '12345'.
-	self assert: cuoora usuarios size equals: 2
+	self assert: cuoora usuarios size equals: 3
 ]
 
 { #category : #test }
 CuOOraTest >> testObtenerPreguntasDeTopico [
-
-	self flag: #toImplement.
-	self assert: false
+	|preguntasDeTopicos|
+	preguntasDeTopicos:=cuoora obtenerPreguntasDeTopico: topicoPharo .
+	
+	self assert: preguntasDeTopicos size equals: 2 .
 ]
 
 { #category : #test }

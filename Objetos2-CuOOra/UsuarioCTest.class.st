@@ -30,8 +30,8 @@ UsuarioCTest >> setUp [
 
 
 	"______________NUEVO TOPICO DE INTERES______________"
-	user
-		agregarTopicoDeInteres: (topicoMusica).
+	"user
+		agregarTopicoDeInteres: (topicoMusica)."
 
 	"______________SEGUIR A USUARIO______________"
 	user serFollowerDe: (UsuarioC new: 'OO2' conPass: '123456').
@@ -72,6 +72,8 @@ UsuarioCTest >> testAgregarRespuestaAPreguntaContenido [
 
 { #category : #tests }
 UsuarioCTest >> testAgregarTopicoDeInteres [
+	
+	user agregarTopicoDeInteres: topicoMusica .
 	self
 		assert: user topicos first nombre equals: 'Musica';
 		assert: user topicos size equals: 1
