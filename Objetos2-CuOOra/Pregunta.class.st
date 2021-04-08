@@ -34,6 +34,11 @@ Pregunta >> initialize [
 	rtas:= OrderedCollection new.
 ]
 
+{ #category : #'as yet unclassified' }
+Pregunta >> obtenerRespuestasDe: aUsuario [
+	^rtas select: [ :r | r user == aUsuario ]
+]
+
 { #category : #accessing }
 Pregunta >> respuestas [
 	^ rtas

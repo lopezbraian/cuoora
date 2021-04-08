@@ -98,6 +98,12 @@ UsuarioC >> obtenerPreguntasDeTopico: aTopico [
 	^ preguntasValidas.
 ]
 
+{ #category : #'as yet unclassified' }
+UsuarioC >> obtenerRespuestasDe: aUsuario [
+
+^preguntas flatCollect: [ :p | p obtenerRespuestasDe: aUsuario  ]
+]
+
 { #category : #accessing }
 UsuarioC >> pass: anObject [
 	pass := anObject

@@ -45,22 +45,26 @@ CuOOra >> obtenerPreguntasDeTopico: aTopico [
 { #category : #'as yet unclassified' }
 CuOOra >> obtenerPreguntasRelevantesPara: aUser [
 	"Se consideran relevantes las preguntas que pertenecen a los usuarios seguidos y a las que coinciden con los topicos de interes"
-|relevantes|
-relevantes:= OrderedCollection new.
-relevantes addAll:(	usuarios
-		flatCollect: [ :each | 
-			aUser topicos
-				flatCollect: [ :topico | each obtenerPreguntasDeTopico: topico ] ]).
-relevantes addAll:((usuarios
-		flatCollect: [ :each | aUser seguidos flatCollect: [ :seguidos | seguidos == each ] ])
-		flatCollect: [ :s | s preguntas ]).
-		
-^relevantes 
+
+	| relevantes |
+	relevantes := Set new.
+	aUser topicos isEmpty
+		ifFalse: [ relevantes
+				addAll:((usuarios reject:[ :each | each == aUser])
+								flatCollect: [ :u | aUser topicos
+										flatCollect: [ :t | u obtenerPreguntasDeTopico: t ]])].
+	aUser seguidos isEmpty
+		ifFalse: [ relevantes
+				addAll:
+					((usuarios
+						flatCollect: [ :u | aUser seguidos select: [ :s | s == u ] ])
+						flatCollect: [ :s | s preguntas ]) ].
+	^ relevantes
 ]
 
 { #category : #'as yet unclassified' }
 CuOOra >> obtenerRespuestaAPregunta: aPregunta [
-	^aPregunta respuestas	asSortedCollection sortBlock: [ :p1 :p2| p1 puntaje >= p2 puntaje ].
+	^ aPregunta respuestas asSortedCollection: [ :p1 :p2 | p1 puntaje >= p2 puntaje ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -70,13 +74,15 @@ CuOOra >> preguntasDe: aUsuario [
 
 { #category : #'as yet unclassified' }
 CuOOra >> puntajeDe: aUsuario [
-	^(self preguntasDe: aUsuario size*20)+(self respuestasDe: aUsuario size*50).
+	^ ((self preguntasDe: aUsuario) size * 20)
+		+ ((self respuestasDe: aUsuario) size * 50)
 ]
 
 { #category : #'as yet unclassified' }
-CuOOra >> respuestasDe: aUsuario [ 
+CuOOra >> respuestasDe: aUsuario [
+	"tiene que considerar las respuestas a sus propias preguntas?????"
 
-^usuarios preguntas flatCollect: [ :each | each respuestas user == aUsuario ].
+	^ (usuarios reject: [:u | u ==aUsuario])flatCollect: [ :u | u obtenerRespuestasDe: aUsuario ].
 ]
 
 { #category : #accessing }
