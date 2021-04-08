@@ -72,6 +72,23 @@ CuOOraTest >> testCrearUsuarioConPass [
 ]
 
 { #category : #test }
+CuOOraTest >> testLoginWithUsernamePass [
+
+	|userlog|
+	userlog := cuoora loginWithUsername: pedro usuario pass: pedro pass. 
+	
+	self assert: userlog usuario equals: 'pedro'.
+	
+	userlog := cuoora loginWithUsername: maria usuario pass: maria pass. 
+	
+	self assert: userlog usuario equals: 'maria'.
+	
+	userlog := cuoora loginWithUsername: maria usuario pass: 'contraseñaincorrecta'.
+	 
+	self assert:  userlog  equals: nil.
+]
+
+{ #category : #test }
 CuOOraTest >> testObtenerPreguntasDeTopico [
 	|preguntasDeTopicos|
 	preguntasDeTopicos:=cuoora obtenerPreguntasDeTopico: topicoPharo .

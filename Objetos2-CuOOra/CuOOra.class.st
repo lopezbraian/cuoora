@@ -10,8 +10,21 @@ Class {
 		'usuarios',
 		'topicos'
 	],
+	#classInstVars : [
+		'soleInstance'
+	],
 	#category : #'Objetos2-CuOOra-Model'
 }
+
+{ #category : #accessing }
+CuOOra class >> soleInstance [
+	^soleInstance ifNil: [
+		soleInstance := self new .
+	].
+
+
+	
+]
 
 { #category : #'as yet unclassified' }
 CuOOra >> agregarTopico: aName conDescripcion: aText [
@@ -28,10 +41,22 @@ CuOOra >> crearUsuario: aUser conPass: aPass [
 
 { #category : #initialization }
 CuOOra >> initialize [ 
+	|topicoMusica admin|
 	super initialize.
 	
 	usuarios:= OrderedCollection new.
 	topicos:= OrderedCollection new.
+	
+	
+	
+	
+]
+
+{ #category : #'as yet unclassified' }
+CuOOra >> loginWithUsername: aUsername pass: aPass [
+	^ usuarios 
+		detect: [ :each | each usuario = aUsername & (each pass = aPass) ]
+		ifNone: [ nil ].
 ]
 
 { #category : #'as yet unclassified' }

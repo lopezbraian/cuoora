@@ -77,7 +77,8 @@ UsuarioC >> initialize [
 	creacion := DateAndTime now.
 	seguidos := OrderedCollection new.
 	topicos := OrderedCollection new.
-	preguntas := OrderedCollection new
+	preguntas := OrderedCollection new.
+
 ]
 
 { #category : #'as yet unclassified' }
@@ -102,6 +103,11 @@ UsuarioC >> obtenerPreguntasDeTopico: aTopico [
 UsuarioC >> obtenerRespuestasDe: aUsuario [
 
 ^preguntas flatCollect: [ :p | p obtenerRespuestasDe: aUsuario  ]
+]
+
+{ #category : #accessing }
+UsuarioC >> pass [
+	^pass
 ]
 
 { #category : #accessing }
