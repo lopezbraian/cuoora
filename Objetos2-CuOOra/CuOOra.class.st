@@ -17,6 +17,11 @@ Class {
 }
 
 { #category : #accessing }
+CuOOra class >> clearSoleInstance [
+	^ soleInstance := nil.
+]
+
+{ #category : #accessing }
 CuOOra class >> soleInstance [
 	^soleInstance ifNil: [
 		soleInstance := self new .
@@ -28,7 +33,10 @@ CuOOra class >> soleInstance [
 
 { #category : #'as yet unclassified' }
 CuOOra >> agregarTopico: aName conDescripcion: aText [
-	topicos add: (Topico nombre: aName descripcion: aText)
+|newTopic|
+newTopic :=Topico nombre: aName descripcion: aText.
+topicos add: (Topico nombre: aName descripcion: aText).
+^newTopic.
 ]
 
 { #category : #'as yet unclassified' }
@@ -39,17 +47,61 @@ CuOOra >> crearUsuario: aUser conPass: aPass [
 	^user.
 ]
 
+{ #category : #'as yet unclassified' }
+CuOOra >> dataTest [
+	| pedro juan diego OO1 tu smalltalk p |
+	pedro := self
+		crearUsuario: 'pedro@cuoora.com'
+		conPass: 'pedro@cuoora.com'.
+	diego := self
+		crearUsuario: 'diego@cuoora.com'
+		conPass: 'diego@cuoora.com'.
+	juan := self
+		crearUsuario: 'juan@cuoora.com'
+		conPass: 'juan@cuoora.com'.
+	juan serFollowerDe: diego.
+	pedro serFollowerDe: juan.
+	diego serFollowerDe: pedro.
+	OO1 := self
+		agregarTopico: 'OO1'
+		conDescripcion: 'Orientacion a objetos 1'.
+	tu := self agregarTopico: 'Test de unidad' conDescripcion: 'TestCase'.
+	smalltalk := self
+		agregarTopico: 'Smalltalk'
+		conDescripcion: 'Lenguaje de programación'.
+	p := pedro
+		agregarPreguntaConTitulo: '¿Para qué sirve el método SetUp?'
+		Descripcion: 'Para qué sirve el método Set Up en un test???'
+		Topicos:
+			(OrderedCollection new
+				add: OO1;
+				add: tu).
+	diego
+		agregarRespuestaAPregunta: p
+		contenido:
+			'Sirve para instanciar los objetos que son
+evaluados por el test en un único método y que se ejecute
+siempre antes de cada test.'.
+	p := diego
+		agregarPreguntaConTitulo: '¿Qué significa #messageNotUnderstood?'
+		Descripcion: 'Me sale este error y no se que significa'
+		Topicos:
+			(OrderedCollection new
+				add: OO1;
+				add: smalltalk).
+	pedro
+		agregarRespuestaAPregunta: p
+		contenido:
+			'Significa que el objeto que recibió el mensaje
+no encontró ningún método para ejecutar en respuesta.'
+]
+
 { #category : #initialization }
-CuOOra >> initialize [ 
-	|topicoMusica admin|
+CuOOra >> initialize [
 	super initialize.
-	
-	usuarios:= OrderedCollection new.
-	topicos:= OrderedCollection new.
-	
-	
-	
-	
+	usuarios := OrderedCollection new.
+	topicos := OrderedCollection new.
+	self dataTest .
 ]
 
 { #category : #'as yet unclassified' }
@@ -75,16 +127,17 @@ CuOOra >> obtenerPreguntasRelevantesPara: aUser [
 	relevantes := Set new.
 	aUser topicos isEmpty
 		ifFalse: [ relevantes
-				addAll:((usuarios reject:[ :each | each == aUser])
-								flatCollect: [ :u | aUser topicos
-										flatCollect: [ :t | u obtenerPreguntasDeTopico: t ]])].
+				addAll:
+					((usuarios reject: [ :each | each == aUser ])
+						flatCollect:
+							[ :u | aUser topicos flatCollect: [ :t | u obtenerPreguntasDeTopico: t ] ]) ].
 	aUser seguidos isEmpty
 		ifFalse: [ relevantes
 				addAll:
 					((usuarios
 						flatCollect: [ :u | aUser seguidos select: [ :s | s == u ] ])
 						flatCollect: [ :s | s preguntas ]) ].
-	^ relevantes
+	^ relevantes asOrderedCollection .
 ]
 
 { #category : #'as yet unclassified' }

@@ -1,6 +1,9 @@
 Class {
 	#name : #HomeComponent,
 	#superclass : #WAComponent,
+	#instVars : [
+		'collectionPreguntas'
+	],
 	#category : #'Objetos2-CuOOra-UI'
 }
 
@@ -23,13 +26,11 @@ HomeComponent >> renderContentOn:aCanvas [
 
 { #category : #rendering }
 HomeComponent >> renderFeed: aCanvas [
-	|collectionPreguntas|
-	"collectionPreguntas := self session model obtenerPreguntasRelevantesPara: self session user."
-	collectionPreguntas := self session user preguntas.
+	collectionPreguntas := CuOOra soleInstance
+		obtenerPreguntasRelevantesPara: self session user.
 	aCanvas heading: 'Ultimas preguntas'.
 	aCanvas
-		unorderedList: [ collectionPreguntas
-				do: [ :each | aCanvas listItem: each titulo  ] ].
+		unorderedList: [ collectionPreguntas do: [ :each | aCanvas listItem: each titulo ] ]
 ]
 
 { #category : #rendering }
