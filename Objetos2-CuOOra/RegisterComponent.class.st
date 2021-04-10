@@ -32,9 +32,8 @@ RegisterComponent >> password: aPass [
 
 { #category : #'tools registry' }
 RegisterComponent >> register [
-	self model crearUsuario: username conPass: password .
-	
-	self call: LoginComponent new.
+	self model crearUsuario: username conPass: password.
+	self call: (LoginComponent conUser: username Pass: password) .
 ]
 
 { #category : #rendering }

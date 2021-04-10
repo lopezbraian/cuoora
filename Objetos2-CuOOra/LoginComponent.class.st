@@ -8,6 +8,13 @@ Class {
 	#category : #'Objetos2-CuOOra-UI'
 }
 
+{ #category : #'as yet unclassified' }
+LoginComponent class >> conUser: aUsername Pass: aPassword [
+^	self new
+		username: aUsername;
+		password: aPassword yourself
+]
+
 { #category : #initialize }
 LoginComponent >> initialize [ 
 	super initialize .
@@ -44,16 +51,29 @@ LoginComponent >> password: aPassword [
 	password:=aPassword .
 ]
 
+{ #category : #'as yet unclassified' }
+LoginComponent >> registerNewUser [
+
+self call: RegisterComponent new
+]
+
 { #category : #rendering }
 LoginComponent >> renderContentOn: aCanvas [
 	aCanvas
-		form: [ 
-			aCanvas paragraph: [ aCanvas label: 'Usuario'. aCanvas textInput on: #username of:self ].
-			aCanvas paragraph: [ aCanvas label: 'Contraseña'. aCanvas textInput on: #password of:self ].
+		form: [ aCanvas
+				paragraph: [ aCanvas label: 'Usuario'.
+					aCanvas textInput on: #username of: self ].
 			aCanvas
-				button callback: [self login];
-				with: 'Iniciar Sesión'
-			 ].
+				paragraph: [ aCanvas label: 'Contraseña'.
+					aCanvas textInput on: #password of: self ].
+			aCanvas button
+				callback: [ self login ];
+				with: 'Iniciar Sesión' .
+	aCanvas horizontalRule.
+	aCanvas paragraph: 'No tienes una cuenta?'.
+	aCanvas button
+		callback: [ self registerNewUser ];
+		with: 'Regístrate'].
 ]
 
 { #category : #accesing }

@@ -48,10 +48,16 @@ HomeComponent >> renderHeaderTitle:aCanvas [
 ]
 
 { #category : #rendering }
-HomeComponent >> renderHeaderUser:aCanvas [
-	aCanvas
-		div class: 'header-user';
-		with: [ aCanvas paragraph: self session user usuario . aCanvas button: 'Log Out'].
+HomeComponent >> renderHeaderUser: aCanvas [
+	aCanvas div
+		class: 'header-user';
+		with: [ aCanvas paragraph: self session user usuario.
+ aCanvas anchor
+				callback: [ self answer ];
+				with: [ aCanvas button with: 'Logout' ] ]		
+	
+
+
 ]
 
 { #category : #hooks }
