@@ -13,17 +13,20 @@ Class {
 
 { #category : #running }
 CuOOraTest >> setUp [
-	"Para los test toma en cuenta los datos cargados en dataTest, aparte de estos nuevos datos".
+	"Para los test toma en cuenta los datos cargados en dataTest, aparte de estos nuevos datos"
 
 	cuoora := CuOOra new.
 	luis := cuoora crearUsuario: 'luis' conPass: '12345'.
 	maria := cuoora crearUsuario: 'maria' conPass: '12345'.
 	cuoora agregarTopico: 'Juegos' conDescripcion: 'Topico Videojuegos'.
 	"-------------- CREAR TOPICOS ---------------"
-	topicoPharo := Topico nombre: 'Pharo' descripcion: 'Topico de pharo'.
-	topicoSeaside := Topico
-		nombre: 'Seaside'
-		descripcion: 'Topico de seaside'.
+	topicoPharo := OrderedCollection new.
+	topicoPharo
+		add: (Topico nombre: 'Pharo' descripcion: 'Topico de pharo').
+	topicoSeaside := OrderedCollection new.
+	topicoSeaside
+		add: (Topico nombre: 'Seaside' descripcion: 'Topico de seaside').
+
 	"--------------- AGREGAR PREGUNTAS -------------"
 	luis
 		agregarPreguntaConTitulo: 'Colecciones en pharo'
@@ -83,10 +86,9 @@ CuOOraTest >> testLoginWithUsernamePass [
 
 { #category : #test }
 CuOOraTest >> testObtenerPreguntasDeTopico [
-	|preguntasDeTopicos|
-	preguntasDeTopicos:=cuoora obtenerPreguntasDeTopico: topicoPharo .
-	
-	self assert: preguntasDeTopicos size equals: 2 .
+	| preguntasDeTopicos |
+	preguntasDeTopicos := cuoora obtenerPreguntasDeTopico: topicoPharo first.
+	self assert: preguntasDeTopicos size equals: 2
 ]
 
 { #category : #test }

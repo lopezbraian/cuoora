@@ -49,7 +49,7 @@ CuOOra >> crearUsuario: aUser conPass: aPass [
 
 { #category : #'as yet unclassified' }
 CuOOra >> dataTest [
-	| pedro juan diego OO1 tu smalltalk p |
+	| pedro juan diego OO1 tu smalltalk p topiclist |
 	pedro := self
 		crearUsuario: 'pedro@cuoora.com'
 		conPass: 'pedro@cuoora.com'.
@@ -69,13 +69,16 @@ CuOOra >> dataTest [
 	smalltalk := self
 		agregarTopico: 'Smalltalk'
 		conDescripcion: 'Lenguaje de programación'.
+	topiclist := OrderedCollection new.
+	topiclist add: tu.
+	topiclist add: OO1 .
 	p := pedro
 		agregarPreguntaConTitulo: '¿Para qué sirve el método SetUp?'
 		Descripcion: 'Para qué sirve el método Set Up en un test???'
-		Topicos:
-			(OrderedCollection new
-				add: OO1;
-				add: tu).
+		Topicos: topiclist.
+	topiclist := OrderedCollection new .
+	topiclist add: smalltalk.
+	topiclist add: OO1.
 	diego
 		agregarRespuestaAPregunta: p
 		contenido:
@@ -85,10 +88,7 @@ siempre antes de cada test.'.
 	p := diego
 		agregarPreguntaConTitulo: '¿Qué significa #messageNotUnderstood?'
 		Descripcion: 'Me sale este error y no se que significa'
-		Topicos:
-			(OrderedCollection new
-				add: OO1;
-				add: smalltalk).
+		Topicos: topiclist.
 	pedro
 		agregarRespuestaAPregunta: p
 		contenido:

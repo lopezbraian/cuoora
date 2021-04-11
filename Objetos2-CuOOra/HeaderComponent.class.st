@@ -9,6 +9,15 @@ HeaderComponent >> initialize [
 	super initialize.
 ]
 
+{ #category : #'as yet unclassified' }
+HeaderComponent >> logOut [
+"	^ self
+		call:
+			(LoginComponent
+				conUser: self session user usuario
+				Pass: self session user pass)"
+]
+
 { #category : #rendering }
 HeaderComponent >> renderContentOn: aCanvas [
 
@@ -29,12 +38,11 @@ HeaderComponent >> renderHeaderTitle: aCanvas [
 HeaderComponent >> renderHeaderUser: aCanvas [
 	aCanvas div
 		class: 'header-user';
-		with: [ 
-			aCanvas paragraph: self session user usuario.
- 			aCanvas anchor
+		with: [ aCanvas paragraph: self session user usuario.
+			aCanvas anchor
 				class: 'a-logout';
-				callback: [ self answer ];
-				with: 'Logout']
+				callback: [ self logOut ];
+				with: 'Logout' ]
 ]
 
 { #category : #hooks }

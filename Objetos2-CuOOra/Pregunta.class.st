@@ -61,5 +61,5 @@ Pregunta >> topicos [
 
 { #category : #accessing }
 Pregunta >> topicos: aTopico [
-	topicos add: aTopico 
+	topicos addAll: aTopico
 ]

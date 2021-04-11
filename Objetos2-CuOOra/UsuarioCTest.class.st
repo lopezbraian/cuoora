@@ -16,8 +16,14 @@ UsuarioCTest >> setUp [
 
 	user := UsuarioC new: 'pedro' conPass: '123456'.
 	user2 := UsuarioC new: 'maria' conPass: '123456'.
-	topicoMusica:= Topico nombre: 'Musica' descripcion: 'Topico de musica'.
-	topicoSeaside:= Topico nombre: 'Seaside' descripcion: 'Topico de Seaside'.
+	topicoMusica := OrderedCollection new.
+	topicoMusica add:(Topico
+		nombre: 'Musica'
+		descripcion: 'Topico de musica').
+	topicoSeaside := OrderedCollection new.
+	topicoSeaside add:(Topico
+		nombre: 'Seaside'
+		descripcion: 'Topico de Seaside').
 	"______________NUEVA PREGUNTA______________"
 	user
 		agregarPreguntaConTitulo: 'Colecciones en pharo'
@@ -35,12 +41,11 @@ UsuarioCTest >> setUp [
 
 	"______________SEGUIR A USUARIO______________"
 	user serFollowerDe: (UsuarioC new: 'OO2' conPass: '123456').
-	
+
 	"______________NUEVA RESPUESTA A PREGUNTA______________"
-user
+	user
 		agregarRespuestaAPregunta: user2 preguntas first
-		contenido: 'Es un framework para realizar aplicaciones web'.
-	
+		contenido: 'Es un framework para realizar aplicaciones web'
 ]
 
 { #category : #test }
@@ -72,8 +77,7 @@ UsuarioCTest >> testAgregarRespuestaAPreguntaContenido [
 
 { #category : #tests }
 UsuarioCTest >> testAgregarTopicoDeInteres [
-	
-	user agregarTopicoDeInteres: topicoMusica .
+	user agregarTopicoDeInteres: topicoMusica first.
 	self
 		assert: user topicos first nombre equals: 'Musica';
 		assert: user topicos size equals: 1
@@ -89,12 +93,11 @@ UsuarioCTest >> testBorrarPregunta [
 
 { #category : #test }
 UsuarioCTest >> testObtenerPreguntasDeTopico [
-
-	|preguntasTopicoMusica|
-	
-	preguntasTopicoMusica := user obtenerPreguntasDeTopico: topicoMusica .
-	
-	self assert: preguntasTopicoMusica first topicos first equals:topicoMusica.
+	| preguntasTopicoMusica |
+	preguntasTopicoMusica := user
+		obtenerPreguntasDeTopico: (topicoMusica first).
+	self
+		assert: (preguntasTopicoMusica first )		equals: topicoMusica first
 ]
 
 { #category : #tests }

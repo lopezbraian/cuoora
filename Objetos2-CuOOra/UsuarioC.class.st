@@ -53,8 +53,7 @@ UsuarioC >> agregarRespuestaAPregunta: aPregunta contenido: aText [
 
 { #category : #'as yet unclassified' }
 UsuarioC >> agregarTopicoDeInteres: aTopico [
-
-topicos add: aTopico
+	topicos add: aTopico
 ]
 
 { #category : #'as yet unclassified' }
@@ -92,19 +91,9 @@ UsuarioC >> initialize [
 { #category : #'as yet unclassified' }
 UsuarioC >> obtenerPreguntasDeTopico: aTopico [
 	"De la coleccion de preguntas selecciona los que tienen preguntas que cumplan con el topico solicitado"
-	
-	"No lo entendi, no pude hacerlo andar, si ves esto preguntame por wsp XD"
-	"----------------------------------------------------------------------------------------------"
-	"^ preguntas flatCollect: [ :each | each topicos flatCollect: [ :topico | topico = aTopico ] ]."
-	
-	| value preguntasValidas |
-	
-	preguntasValidas := OrderedCollection new.
-	preguntas do: [ :each | 
-			value := each topicos occurrencesOf: aTopico .
-			value = 1 ifTrue: [ preguntasValidas add:each ]. 
-		].
-	^ preguntasValidas.
+
+	^ preguntas
+		flatCollect: [ :each | each topicos select: [ :topico | topico = aTopico ] ]
 ]
 
 { #category : #'as yet unclassified' }

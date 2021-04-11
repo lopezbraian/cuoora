@@ -62,7 +62,7 @@ Entrada >> descr: anObject [
 
 { #category : #'as yet unclassified' }
 Entrada >> dislikes [
-	^ calificaciones count: [ :each | each like == false ].
+	^ calificaciones count: [ :each | each like =false ]
 ]
 
 { #category : #initialization }
@@ -85,7 +85,7 @@ calif:= self calificaciones find: aUsuario.
 
 { #category : #'as yet unclassified' }
 Entrada >> likes [
-	^ calificaciones count: [ :each | each like == true ] .
+	^ calificaciones count: [ :each | each like = true ]
 ]
 
 { #category : #'as yet unclassified' }

@@ -14,12 +14,12 @@ HomeComponent >> agregarNuevaPregunta [
 ]
 
 { #category : #hooks }
-HomeComponent >> children [ 
-|componentToRender|
-componentToRender := OrderedCollection new.
-componentToRender add: btnComponent.
-componentToRender add: entradaComponent.
-^ componentToRender 
+HomeComponent >> children [
+	| componentToRender |
+	componentToRender := OrderedCollection new.
+	componentToRender	add: btnComponent;
+		add: entradaComponent.
+	^ componentToRender
 ]
 
 { #category : #initialization }
@@ -53,19 +53,13 @@ HomeComponent >> renderContentOn:aCanvas [
 
 { #category : #rendering }
 HomeComponent >> renderFeed: aCanvas [
-
 	collectionPreguntas := CuOOra soleInstance
 		obtenerPreguntasRelevantesPara: self session user.
-	aCanvas heading: 'Ultimas preguntas'.
+	aCanvas heading: 'Últimas preguntas'.
 	aCanvas
-		unorderedList: 
-		[ 
-			collectionPreguntas
-				do: 
-				[ 
-					:each | aCanvas listItem: [ aCanvas render:(EntradaComponent setData: each) ]
-				] 
-		].
+		unorderedList: [ collectionPreguntas
+				do:
+					[ :each | aCanvas listItem: [ aCanvas render: (EntradaComponent setData: each) ] ] ]
 ]
 
 { #category : #hooks }

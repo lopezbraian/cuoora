@@ -25,6 +25,7 @@ EntradaComponent >> data:aData [
 
 { #category : #accessing }
 EntradaComponent >> disLike [
+	self session user agregarCalificacion: false aEntrada: data
 ]
 
 { #category : #'as yet unclassified' }
@@ -38,51 +39,70 @@ EntradaComponent >> initialize [
 
 { #category : #accessing }
 EntradaComponent >> like [
+self session user agregarCalificacion: true aEntrada: data. 
 ]
 
 { #category : #rendering }
-EntradaComponent >> renderContentOn:aCanvas [
-	
-	aCanvas anchor class:'pregunta'; 
-	callback:[self goToDetail ];
-	with: [ 
-		aCanvas paragraph class:'title-pregunta' ;with: data titulo.
-		aCanvas span: 'Realiza por '.
-		aCanvas paragraph class: 'nombre-user';
-								with:data user usuario.
-		aCanvas span:[
-			aCanvas text: ' | '.
-			aCanvas text: data respuestas size	
-		].
-		aCanvas paragraph:[
-			aCanvas text: data likes.
-			aCanvas text: ' Likes '.
-			aCanvas text: ' | '.
-			aCanvas text: data likes	.
-			aCanvas text: ' Dislike '.
-			
-		].
-		aCanvas anchor
-			class: 'btn-calif';
-			callback: [self like];
-			with: 'Like'.
-		aCanvas span: '| '.
-		aCanvas anchor
-			class: 'btn-calif';
-			callback: [self disLike];
-			with: 'DisLike'.
-	].
-	aCanvas horizontalRule.
-	
-	 
-	
+EntradaComponent >> renderContentOn: aCanvas [
+	aCanvas anchor
+		class: 'pregunta';
+		callback: [ self goToDetail ];
+		with: [ aCanvas paragraph
+				class: 'title-pregunta';
+				with: data titulo.
+			aCanvas paragraph
+				class: 'topico';
+				with: [ aCanvas text: 'Tópicos: '.
+					aCanvas
+						span: [ data topicos
+								do: [ :t | 
+									aCanvas text: t nombre.
+									aCanvas text: ' / ' ] ] ].
+			aCanvas span: 'Realizada por '.
+			aCanvas paragraph
+				class: 'nombre-user';
+				with: data user usuario.
+			aCanvas
+				span: [ aCanvas text: ' | '.
+					aCanvas text: data respuestas size.
+					aCanvas text: ' respuestas ' ].
+			aCanvas
+				paragraph: [ aCanvas text: data likes.
+					aCanvas text: ' Likes '.
+					aCanvas text: ' | '.
+					aCanvas text: data dislikes.
+					aCanvas text: ' Dislike ' ].
+			aCanvas anchor
+				class: 'btn-calif';
+				callback: [ self like ];
+				with: 'like'.
+			aCanvas span: '| '.
+			aCanvas anchor
+				class: 'btn-calif';
+				callback: [ self disLike ];
+				with: 'dislike' ].
+	aCanvas horizontalRule
 
+
+	"			aCanvas paragraph
+				class: 'topico';
+				with: [ aCanvas text: 'Topicos: '.
+					aCanvas paragraph
+						class: 'topico';
+						with: [ data topicos do: [ :t | aCanvas text:  t nombre   ] ]].
+"
 ]
 
 { #category : #hooks }
-EntradaComponent >> style [ 
-^'.title-pregunta{
+EntradaComponent >> style [
+	^ '.title-pregunta{
 		font-style: italic;
+		font-size: 20px
+	}
+	
+	.topico{
+		font-style: italic;
+		color: #9c9c9c
 	}
 	.pregunta { 
 		display:block;
