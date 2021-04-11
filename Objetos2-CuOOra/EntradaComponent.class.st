@@ -84,13 +84,6 @@ EntradaComponent >> renderContentOn: aCanvas [
 	aCanvas horizontalRule
 
 
-	"			aCanvas paragraph
-				class: 'topico';
-				with: [ aCanvas text: 'Topicos: '.
-					aCanvas paragraph
-						class: 'topico';
-						with: [ data topicos do: [ :t | aCanvas text:  t nombre   ] ]].
-"
 ]
 
 { #category : #hooks }
