@@ -30,7 +30,7 @@ LoginComponent >> login [
 	ifNotNil: [
 		self session user: user.
 		self session model: self model.
-		^self call: HomeComponent new 	
+		^self call: (LayoutComponent withComponent: HomeComponent ) 	
 	].
 	
 

@@ -2,14 +2,32 @@ Class {
 	#name : #HomeComponent,
 	#superclass : #WAComponent,
 	#instVars : [
-		'collectionPreguntas'
+		'collectionPreguntas',
+		'btnComponent',
+		'entradaComponent'
 	],
 	#category : #'Objetos2-CuOOra-UI'
 }
 
+{ #category : #'as yet unclassified' }
+HomeComponent >> agregarNuevaPregunta [
+]
+
+{ #category : #hooks }
+HomeComponent >> children [ 
+|componentToRender|
+componentToRender := OrderedCollection new.
+componentToRender add: btnComponent.
+componentToRender add: entradaComponent.
+^ componentToRender 
+]
+
 { #category : #initialization }
 HomeComponent >> initialize [ 
 	super initialize .
+	btnComponent := BtnComponent withContent: 'Agregar una nueva respuesta' action: self agregarNuevaPregunta.
+	entradaComponent := EntradaComponent new.
+	 
 ]
 
 { #category : #accessing }
@@ -19,72 +37,43 @@ HomeComponent >> model [
 
 { #category : #rendering }
 HomeComponent >> renderContentOn:aCanvas [
-	self session user.
-	self renderHeaderOn: aCanvas.
+	"btnComponent := ButtonComponent new.
+	btnComponent action:self agregarNuevaPregunta .
+	btnComponent content:'hola'.
+	btnComponent renderContentOn:aCanvas."
+	aCanvas div class: 'wrap-btn'; with:[
+	aCanvas render: btnComponent .	
+	].
+	
+	
+	
 	self renderFeed: aCanvas.
+	
 ]
 
 { #category : #rendering }
 HomeComponent >> renderFeed: aCanvas [
+
 	collectionPreguntas := CuOOra soleInstance
 		obtenerPreguntasRelevantesPara: self session user.
 	aCanvas heading: 'Ultimas preguntas'.
 	aCanvas
-		unorderedList: [ collectionPreguntas do: [ :each | aCanvas listItem: each titulo ] ]
-]
-
-{ #category : #rendering }
-HomeComponent >> renderHeaderOn:aCanvas [
-	aCanvas
-		div class: 'header-wrapper';
-		with: [ self renderHeaderTitle: aCanvas . self renderHeaderUser: aCanvas].
-	aCanvas horizontalRule.
-]
-
-{ #category : #rendering }
-HomeComponent >> renderHeaderTitle:aCanvas [
-	aCanvas
-		div class: 'header-title';
-		with: [ aCanvas heading:'cuOOra'].
-]
-
-{ #category : #rendering }
-HomeComponent >> renderHeaderUser: aCanvas [
-	aCanvas div
-		class: 'header-user';
-		with: [ aCanvas paragraph: self session user usuario.
- aCanvas anchor
-				callback: [ self answer ];
-				with: [ aCanvas button with: 'Logout' ] ]		
-	
-
-
+		unorderedList: 
+		[ 
+			collectionPreguntas
+				do: 
+				[ 
+					:each | aCanvas listItem: [ aCanvas render:(EntradaComponent setData: each) ]
+				] 
+		].
 ]
 
 { #category : #hooks }
-HomeComponent >> style [
-	^'.header-wrapper {
-			display:flex;
-			justify-content: space-between;
-			align-items:center;
-		 }
-		.header-user {
-			text-align:right;
-			width:100%;
-		 }
-		.header-user p { 
-		display:inline-block;
-			font-weight:bold;
-			text-transform: Capitalize;
-		 }
-		.header-user button { 
-			border:none;
-			background:none;
-			cursor:pointer;
-		 }
-		.header-title {
-			text-align:left;
-			width:100%;
-		 }
-	'
+HomeComponent >> style [ 
+
+^'
+	.wrap-btn{
+		position:relative;
+	}
+'
 ]
