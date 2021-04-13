@@ -2,30 +2,16 @@ Class {
 	#name : #BtnComponent,
 	#superclass : #WAComponent,
 	#instVars : [
-		'content',
-		'action'
+		'content'
 	],
 	#category : #'Objetos2-CuOOra-UI'
 }
 
 { #category : #initialization }
-BtnComponent class >> withContent:aContent action:anAction [
+BtnComponent class >> withContent:aContent [ 
 ^	self new
-		content: aContent;
-		action: anAction .
+		content: aContent.
 	
-]
-
-{ #category : #initialization }
-BtnComponent >> action [
-
-^action .
-]
-
-{ #category : #initialization }
-BtnComponent >> action:anAction [
-
-action:=anAction .
 ]
 
 { #category : #initialization }
@@ -46,39 +32,32 @@ BtnComponent >> initialize [
 
 { #category : #rendering }
 BtnComponent >> renderContentOn: aCanvas [
-	
-	aCanvas div 
-		class:'btn';
-		with: [
-			aCanvas anchor
-					class: 'a-btn';
-       			callback: [ action  ];
-       			with: [ 
-						aCanvas div class:'btn-icon' ; with:'+'.
-						aCanvas paragraph class:'btn-text';
-						with: 'Hacer una nueva pregunta'
-					]
-		].
+	aCanvas paragraph
+		class: 'btn';
+		with: [ aCanvas span
+				class: 'btn-icon';
+				with: '+'.
+			aCanvas span
+				class: 'btn-text';
+				with:  self content]
 ]
 
 { #category : #hooks }
 BtnComponent >> style [ 
 ^'
 .btn { 
-position: absolute;
-	right:0;
- }
-.a-btn {
 	display:flex;
 	align-items:center;
-	text-decoration:none;
-	color:black;
-}
+	width:225px;
+	justify-content:center;
+ }
+
+
 .btn-icon { 
     width: 30px;
     height: 30px;
     background: red;
-    color: white;
+    color: white ;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -93,6 +72,7 @@ position: absolute;
  }
 .btn-text { 
 	margin-left:5px;
+	font-weight:bold;
  }
 		
 '

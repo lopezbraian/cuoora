@@ -1,3 +1,9 @@
+"
+| application |
+application := WAAdmin register: LoginComponent asApplicationAt: 'simple-net'.
+application sessionClass: SessionWithUser.
+
+"
 Class {
 	#name : #LoginComponent,
 	#superclass : #WAComponent,
@@ -20,20 +26,15 @@ LoginComponent >> initialize [
 	super initialize .
 ]
 
-{ #category : #'private protocol' }
+{ #category : #callback }
 LoginComponent >> login [
-	|user|
-	user:=self model  loginWithUsername: username pass: password.
-	
-	user 
-	ifNil: [ ^ false] 
-	ifNotNil: [
-		self session user: user.
-		self session model: self model.
-		^self call: (LayoutComponent withComponent: HomeComponent ) 	
-	].
-	
-
+	| user |
+	user := self model loginWithUsername: username pass: password.
+	user
+		ifNil: [ ^ false ]
+		ifNotNil: [ self session user: user.
+			self session model: self model.
+			^ self call: (PageHomeComponent new ) ]
 ]
 
 { #category : #model }
@@ -51,29 +52,78 @@ LoginComponent >> password: aPassword [
 	password:=aPassword .
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #callback }
 LoginComponent >> registerNewUser [
 
-self call: RegisterComponent new
+self call: (RegisterComponent new).
 ]
 
-{ #category : #rendering }
+{ #category : #'as yet unclassified' }
 LoginComponent >> renderContentOn: aCanvas [
-	aCanvas
-		form: [ aCanvas
-				paragraph: [ aCanvas label: 'Usuario'.
-					aCanvas textInput on: #username of: self ].
-			aCanvas
-				paragraph: [ aCanvas label: 'Contraseña'.
-					aCanvas textInput on: #password of: self ].
+	aCanvas paragraph
+		class: 'title';
+		with: 'CuOOra'.
+	aCanvas form
+		class: 'form-login';
+		with: [ aCanvas label: 'Usuario'.
+			aCanvas textInput
+				placeholder: 'user@cuoora.com';
+				on: #username of: self.
+			aCanvas break.
+			aCanvas break.
+			aCanvas label: 'Contraseña'.
+			aCanvas textInput
+				type: 'password';
+				placeholder: '**********';
+				on: #password of: self.
+			aCanvas break.
 			aCanvas button
+				class: 'btn-login';
 				callback: [ self login ];
-				with: 'Iniciar Sesión' .
+				with: 'Iniciar Sesión' ].
+	aCanvas break.
+	aCanvas break.
 	aCanvas horizontalRule.
-	aCanvas paragraph: 'No tienes una cuenta?'.
-	aCanvas button
-		callback: [ self registerNewUser ];
-		with: 'Regístrate'].
+	aCanvas div
+		class: 'login-btn-register';
+		with: [ aCanvas paragraph: 'No tienes una cuenta?'.
+			aCanvas button
+				callback: [ self registerNewUser ];
+				with: 'Regístrate' ]
+]
+
+{ #category : #hooks }
+LoginComponent >> style [
+^'
+.title{
+	font-size:2.5rem;
+	margin:5px;
+}
+.form-login{ 
+	margin:50px;
+	margin-bottom:0px;
+}
+.form-login > label { 
+	display:inline-block;
+	width:100px;
+	font-weight:bold;
+}
+.form-login > input { 
+	border:2px solid black;
+}
+.btn-login { 
+	margin-left:100px;
+	margin-top:20px;
+	background-color: #0098EF;
+	height:40px;
+	border:none;
+	color:white;
+}
+.login-btn-register{
+	width: 150px;
+	margin:0 auto;
+	text-align:center;
+'
 ]
 
 { #category : #accesing }

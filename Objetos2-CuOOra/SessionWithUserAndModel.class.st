@@ -9,6 +9,14 @@ Class {
 }
 
 { #category : #accessing }
+SessionWithUserAndModel >> logout [
+
+	user := nil.
+	model:= nil.
+
+]
+
+{ #category : #accessing }
 SessionWithUserAndModel >> model [
 
 	^model

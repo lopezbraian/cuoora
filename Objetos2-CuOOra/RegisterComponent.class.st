@@ -30,7 +30,7 @@ RegisterComponent >> password: aPass [
 	password:= aPass.
 ]
 
-{ #category : #'tools registry' }
+{ #category : #callback }
 RegisterComponent >> register [
 	self model crearUsuario: username conPass: password.
 	self call: (LoginComponent conUser: username Pass: password) .
@@ -42,7 +42,7 @@ RegisterComponent >> renderContentOn: aCanvas [
 	aCanvas
 		form: [ 
 			aCanvas paragraph: [ aCanvas label: 'Usuario'. aCanvas textInput on: #username of:self ].
-			aCanvas paragraph: [ aCanvas label: 'Contraseña'. aCanvas textInput on: #password of:self ].
+			aCanvas paragraph: [ aCanvas label: 'Contrase√±a'. aCanvas textInput on: #password of:self ].
 			aCanvas
 				button callback: [self register];
 				with: 'Registrarse'

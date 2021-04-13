@@ -9,46 +9,52 @@ HeaderComponent >> initialize [
 	super initialize.
 ]
 
-{ #category : #'as yet unclassified' }
-HeaderComponent >> logOut [
-"	^ self
-		call:
-			(LoginComponent
-				conUser: self session user usuario
-				Pass: self session user pass)"
+{ #category : #callback }
+HeaderComponent >> profileOfUser: aUser [
+
+^self call: (PageProfileComponent newWithData: aUser )
 ]
 
 { #category : #rendering }
 HeaderComponent >> renderContentOn: aCanvas [
-
-	aCanvas
-		div class: 'header-wrapper';
-		with: [ self renderHeaderTitle: aCanvas . self renderHeaderUser: aCanvas].
-	aCanvas horizontalRule.
-]
-
-{ #category : #rendering }
-HeaderComponent >> renderHeaderTitle: aCanvas [
-	aCanvas
-		div class: 'header-title';
-		with: [ aCanvas heading:'CuOOra'].
-]
-
-{ #category : #rendering }
-HeaderComponent >> renderHeaderUser: aCanvas [
 	aCanvas div
-		class: 'header-user';
-		with: [ aCanvas paragraph: self session user usuario.
-			aCanvas anchor
-				class: 'a-logout';
-				callback: [ self logOut ];
-				with: 'Logout' ]
+		class: 'header-wrapper';
+		with: [ aCanvas div
+				class: 'header-title';
+				with: [ aCanvas heading: 'CuOOra' ].
+			aCanvas div
+				class: 'header-user';
+				with: [ aCanvas paragraph: self session user usuario.
+					aCanvas anchor
+						class: 'a-logout';
+						callback: [ self logOut ];
+						with: 'Logout' ] ].
+	aCanvas horizontalRule
+]
+
+{ #category : #rendering }
+HeaderComponent >> renderHeader: aCanvas [
+	aCanvas div
+		class: 'header-wrapper';
+		with: [ aCanvas div
+				class: 'header-title';
+				with: [ aCanvas heading: 'CuOOra' ].
+			aCanvas div
+				class: 'header-user';
+				with: [ aCanvas paragraph: self session user usuario.
+					aCanvas anchor
+						class: 'a-logout';
+						callback: [ self logOut ];
+						with: 'Logout' ] ].
+	aCanvas horizontalRule
 ]
 
 { #category : #hooks }
 HeaderComponent >> style [ 
+
 ^'
-		.header-wrapper {
+
+.header-wrapper {
 			display:flex;
 			justify-content: space-between;
 			align-items:center;
