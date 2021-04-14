@@ -104,32 +104,32 @@ PageEntradaDetailComponent >> renderContentOn: aCanvas [
 
 { #category : #'as yet unclassified' }
 PageEntradaDetailComponent >> respuestas: aCanvas [
-
 	aCanvas
-		unorderedList: [ entrada respuestas do:
-					[ :each | aCanvas listItem: [ aCanvas render: [aCanvas span: 'Respuesta de '.
-	aCanvas paragraph
-		class: 'nombre-user';
-		with: each user usuario.
-	aCanvas text: ' '.
-	aCanvas paragraph 
-		with: each content.
-	aCanvas
-		paragraph: [ aCanvas text: each likes.
-			aCanvas text: ' Likes '.
-			aCanvas text: ' | '.
-			aCanvas text: each dislikes.
-			aCanvas text: ' Dislike ' ].
-	aCanvas anchor
-		class: 'btn-calif';
-		callback: [ self session user agregarCalificacion: true aEntrada:  each ];
-		with: 'like'.
-	aCanvas span: '| '.
-	aCanvas anchor
-		class: 'btn-calif';
-		callback: [ self session user agregarCalificacion: false aEntrada:  each ];
-		with: 'dislike'.
-	aCanvas horizontalRule] ] ] ].	
-			
-
+		unorderedList: [ entrada respuestas
+				do: [ :each | 
+					aCanvas
+						listItem: [ aCanvas
+								render: [ aCanvas span: 'Respuesta de '.
+									aCanvas anchor
+										class: 'nombre-user';
+										callback: [ self profileOfUser: each user ];
+										with: each user usuario.
+									aCanvas text: ' '.
+									aCanvas paragraph with: each content.
+									aCanvas
+										paragraph: [ aCanvas text: each likes.
+											aCanvas text: ' Likes '.
+											aCanvas text: ' | '.
+											aCanvas text: each dislikes.
+											aCanvas text: ' Dislike ' ].
+									aCanvas anchor
+										class: 'btn-calif';
+										callback: [ self session user agregarCalificacion: true aEntrada: each ];
+										with: 'like'.
+									aCanvas span: '| '.
+									aCanvas anchor
+										class: 'btn-calif';
+										callback: [ self session user agregarCalificacion: false aEntrada: each ];
+										with: 'dislike'.
+									aCanvas horizontalRule ] ] ] ]
 ]

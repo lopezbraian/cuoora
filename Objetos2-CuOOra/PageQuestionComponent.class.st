@@ -33,8 +33,12 @@ PageQuestionComponent >> desarrollo: anObject [
 
 { #category : #callback }
 PageQuestionComponent >> guardar [
-topicosSelected .
-self session user agregarPreguntaConTitulo: titulo Descripcion: desarrollo  Topicos: topicosSelected . 
+	topicosSelected.
+	self session user
+		agregarPreguntaConTitulo: titulo
+		Descripcion: desarrollo
+		Topicos: topicosSelected.
+	^ self call: PageQuestionComponent new.
 ]
 
 { #category : #initialization }

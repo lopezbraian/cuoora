@@ -13,7 +13,7 @@ Class {
 }
 
 { #category : #creation }
-Topico class >> nombre: aName descripcion: aText [
+Topico class >> newConNombre: aName descripcion: aText [
 |t|
 
 t:=self new.

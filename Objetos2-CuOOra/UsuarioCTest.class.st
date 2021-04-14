@@ -10,6 +10,14 @@ Class {
 	#category : #'Objetos2-CuOOra-Test'
 }
 
+{ #category : #tests }
+UsuarioCTest >> /testEsFollowerDe [
+	| user3 |
+	user3 := UsuarioC new: 'julio' conPass: '123456'.
+	self assert: (user esFollowerDe: user2) equals: true.
+	self assert: (user esFollowerDe: user3) equals: false
+]
+
 { #category : #running }
 UsuarioCTest >> setUp [
 	"Hooks that subclasses may override to define the fixture of test."
@@ -17,13 +25,11 @@ UsuarioCTest >> setUp [
 	user := UsuarioC new: 'pedro' conPass: '123456'.
 	user2 := UsuarioC new: 'maria' conPass: '123456'.
 	topicoMusica := OrderedCollection new.
-	topicoMusica add:(Topico
-		nombre: 'Musica'
-		descripcion: 'Topico de musica').
+	topicoMusica
+		add: (Topico newConNombre: 'Musica' descripcion: 'Topico de musica').
 	topicoSeaside := OrderedCollection new.
-	topicoSeaside add:(Topico
-		nombre: 'Seaside'
-		descripcion: 'Topico de Seaside').
+	topicoSeaside
+		add: (Topico newConNombre: 'Seaside' descripcion: 'Topico de Seaside').
 	"______________NUEVA PREGUNTA______________"
 	user
 		agregarPreguntaConTitulo: 'Colecciones en pharo'
@@ -40,7 +46,7 @@ UsuarioCTest >> setUp [
 		agregarTopicoDeInteres: (topicoMusica)."
 
 	"______________SEGUIR A USUARIO______________"
-	user serFollowerDe: (UsuarioC new: 'OO2' conPass: '123456').
+	user serFollowerDe: user2.
 
 	"______________NUEVA RESPUESTA A PREGUNTA______________"
 	user
@@ -91,18 +97,28 @@ UsuarioCTest >> testBorrarPregunta [
 	self assert: user preguntas size equals: 0
 ]
 
+{ #category : #tests }
+UsuarioCTest >> testEsFollowerDe [
+|user3|
+
+user3:= UsuarioC new: 'julio' conPass:'123456'.
+ 
+	self assert: (user esFollowerDe: user2) equals: true.
+	self assert: (user esFollowerDe: user3 ) equals: false
+	
+]
+
 { #category : #test }
 UsuarioCTest >> testObtenerPreguntasDeTopico [
 	| preguntasTopicoMusica |
 	preguntasTopicoMusica := user
-		obtenerPreguntasDeTopico: (topicoMusica first).
-	self
-		assert: (preguntasTopicoMusica first )		equals: topicoMusica first
+		obtenerPreguntasDeTopico: topicoMusica first.
+	self assert: preguntasTopicoMusica first equals: user preguntas first.
 ]
 
 { #category : #tests }
 UsuarioCTest >> testSerFollowerDe [
-	self assert: user seguidos first usuario equals: 'OO2'.
+	self assert: user seguidos first usuario equals: 'maria'.
 	self assert: user seguidos size equals: 1
 ]
 

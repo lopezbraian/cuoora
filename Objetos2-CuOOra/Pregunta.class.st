@@ -44,6 +44,12 @@ Pregunta >> respuestas [
 	^ rtas
 ]
 
+{ #category : #'as yet unclassified' }
+Pregunta >> tieneTopico: unTopico [
+
+^topicos includes: unTopico .
+]
+
 { #category : #accessing }
 Pregunta >> titulo [
 	^ titulo

@@ -73,16 +73,6 @@ creacion := DateAndTime now.
 calificaciones := OrderedCollection new.
 ]
 
-{ #category : #testing }
-Entrada >> isLikedFrom:aUsuario [
-
-|calif|
-
-calif:= self calificaciones find: aUsuario.
-
-^calif.
-]
-
 { #category : #'as yet unclassified' }
 Entrada >> likes [
 	^ calificaciones count: [ :each | each like = true ]

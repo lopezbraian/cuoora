@@ -34,17 +34,18 @@ CuOOra class >> soleInstance [
 { #category : #'as yet unclassified' }
 CuOOra >> agregarTopico: aName conDescripcion: aText [
 |newTopic|
-newTopic :=Topico nombre: aName descripcion: aText.
-topicos add: (Topico nombre: aName descripcion: aText).
+newTopic :=Topico newConNombre: aName descripcion: aText.
+topicos add: (Topico newConNombre: aName descripcion: aText).
 ^newTopic.
 ]
 
 { #category : #'as yet unclassified' }
 CuOOra >> crearUsuario: aUser conPass: aPass [
-	|user|
-	user:= UsuarioC new: aUser conPass: aPass.
-	usuarios add: user.
-	^user.
+	| user |
+	user := UsuarioC new: aUser conPass: aPass.
+	(usuarios includes: user)
+		ifFalse: [usuarios add: user].
+	^ user
 ]
 
 { #category : #'as yet unclassified' }
@@ -62,6 +63,8 @@ CuOOra >> dataTest [
 	juan serFollowerDe: diego.
 	pedro serFollowerDe: juan.
 	diego serFollowerDe: pedro.
+	
+	
 	OO1 := self
 		agregarTopico: 'OO1'
 		conDescripcion: 'Orientacion a objetos 1'.
@@ -71,12 +74,14 @@ CuOOra >> dataTest [
 		conDescripcion: 'Lenguaje de programación'.
 	topiclist := OrderedCollection new.
 	topiclist add: tu.
-	topiclist add: OO1 .
-	p := pedro
+	topiclist add: OO1.
+	
+	pedro agregarTopicoDeInteres: smalltalk.
+	p  := pedro
 		agregarPreguntaConTitulo: '¿Para qué sirve el método SetUp?'
 		Descripcion: 'Para qué sirve el método Set Up en un test???'
 		Topicos: topiclist.
-	topiclist := OrderedCollection new .
+	topiclist := OrderedCollection new.
 	topiclist add: smalltalk.
 	topiclist add: OO1.
 	diego

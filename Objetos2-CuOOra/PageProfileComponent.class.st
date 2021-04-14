@@ -14,10 +14,21 @@ PageProfileComponent class >> newWithData: aUser [
 ]
 
 { #category : #'as yet unclassified' }
-PageProfileComponent >> follow [
+PageProfileComponent >> follow [ 
 
-self session user serFollowerDe: profile
+self session user serFollowerDe: profile 
+]
 
+{ #category : #'as yet unclassified' }
+PageProfileComponent >> follow: aCanvas [
+	(profile == self session user)
+		ifFalse: [(self session user esFollowerDe: profile)
+		ifFalse: [	 ^ aCanvas anchor
+					callback: [ self follow ];
+					with: 'follow' ];
+		ifTrue: [ ^ aCanvas anchor
+					callback: [ self unFollow ];
+					with: 'dejar de seguir' ]].
 ]
 
 { #category : #'as yet unclassified' }
@@ -86,9 +97,13 @@ PageProfileComponent >> renderContentOn: aCanvas [
 		class: 'title';
 		with: [ aCanvas text: 'Preguntas de '.
 			aCanvas text: profile usuario.
-			aCanvas text: '  '.
-			aCanvas anchor
-				callback: [ self follow ];
-				with: 'follow' ].
+			aCanvas text: '  ' .
+	self follow: aCanvas].
 	self preguntas: aCanvas
+]
+
+{ #category : #'as yet unclassified' }
+PageProfileComponent >> unFollow [
+
+self session user unFollow: profile 
 ]

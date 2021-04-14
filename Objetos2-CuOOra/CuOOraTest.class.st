@@ -22,10 +22,10 @@ CuOOraTest >> setUp [
 	"-------------- CREAR TOPICOS ---------------"
 	topicoPharo := OrderedCollection new.
 	topicoPharo
-		add: (Topico nombre: 'Pharo' descripcion: 'Topico de pharo').
+		add: (Topico newConNombre: 'Pharo' descripcion: 'Topico de pharo').
 	topicoSeaside := OrderedCollection new.
 	topicoSeaside
-		add: (Topico nombre: 'Seaside' descripcion: 'Topico de seaside').
+		add: (Topico newConNombre: 'Seaside' descripcion: 'Topico de seaside').
 
 	"--------------- AGREGAR PREGUNTAS -------------"
 	luis
@@ -43,7 +43,7 @@ CuOOraTest >> setUp [
 
 	"---------------- AGREGANDO TOPICOS DE INTERES ----------------"
 	luis
-		agregarTopicoDeInteres: (Topico nombre: 'Musica' descripcion: 'Topico de musica').
+		agregarTopicoDeInteres: (Topico newConNombre: 'Musica' descripcion: 'Topico de musica').
 
 	"---------------- AGREGANDO FOLLOWERS -----------------------"
 	luis serFollowerDe: maria.

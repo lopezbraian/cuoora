@@ -12,19 +12,6 @@ PageHomeComponent >> agregarNuevaPregunta [
 	self call: (PageQuestionComponent new)
 ]
 
-{ #category : #hooks }
-PageHomeComponent >> children [
-
-|componentsToRender|
-
-componentsToRender := OrderedCollection new.
-
-componentsToRender add: BtnComponent new.
-componentsToRender add: HeaderComponent new.
-
-^ componentsToRender .
-]
-
 { #category : #callback }
 PageHomeComponent >> goToDetail: aPregunta [
 

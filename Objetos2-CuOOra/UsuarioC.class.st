@@ -48,7 +48,7 @@ UsuarioC >> agregarPreguntaConTitulo: aTitle Descripcion: aText Topicos: aTopico
 { #category : #'as yet unclassified' }
 UsuarioC >> agregarRespuestaAPregunta: aPregunta contenido: aText [
 	aPregunta
-		agregarRespuesta: (Respuesta newPreguntaConcontenido: aText from: self)
+		agregarRespuesta: (Respuesta newRespuestaConcontenido: aText from: self)
 ]
 
 { #category : #'as yet unclassified' }
@@ -59,6 +59,11 @@ UsuarioC >> agregarTopicoDeInteres: aTopico [
 { #category : #'as yet unclassified' }
 UsuarioC >> borrarPregunta: aPregunta [
 	preguntas remove: aPregunta
+]
+
+{ #category : #'as yet unclassified' }
+UsuarioC >> esFollowerDe: aUsuario [
+	^seguidos includes: aUsuario
 ]
 
 { #category : #accessing }
@@ -93,7 +98,7 @@ UsuarioC >> obtenerPreguntasDeTopico: aTopico [
 	"De la coleccion de preguntas selecciona los que tienen preguntas que cumplan con el topico solicitado"
 
 	^ preguntas
-		flatCollect: [ :each | each topicos select: [ :topico | topico = aTopico ] ]
+		select: [ :each | each tieneTopico: aTopico  ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -136,6 +141,12 @@ UsuarioC >> serFollowerDe: aUsuario [
 UsuarioC >> topicos [
 
 ^topicos
+]
+
+{ #category : #'as yet unclassified' }
+UsuarioC >> unFollow: aUsuario [
+
+seguidos remove: aUsuario .
 ]
 
 { #category : #accessing }

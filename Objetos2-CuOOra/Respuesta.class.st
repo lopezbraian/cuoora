@@ -13,7 +13,7 @@ Class {
 }
 
 { #category : #'instance creation' }
-Respuesta class >> newPreguntaConcontenido:aText from:aUsuario [
+Respuesta class >> newRespuestaConcontenido:aText from:aUsuario [
 
 |r|
 r:= self new.
@@ -22,14 +22,12 @@ r:= self new.
 
 { #category : #accessing }
 Respuesta >> content [
-
-^content.
+	^ descr
 ]
 
 { #category : #accessing }
-Respuesta >> content: aContent [.
-
-	content:=aContent.
+Respuesta >> content: aContent [
+	descr := aContent
 ]
 
 { #category : #accessing }

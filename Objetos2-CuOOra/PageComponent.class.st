@@ -8,6 +8,11 @@ Class {
 	#category : #'Objetos2-CuOOra-UI'
 }
 
+{ #category : #callback }
+PageComponent >> homeOfUser [
+	^ self call: PageHomeComponent new
+]
+
 { #category : #initialization }
 PageComponent >> initialize [ 
 	super initialize.
@@ -28,15 +33,17 @@ PageComponent >> profileOfUser: aUser [
 
 { #category : #rendering }
 PageComponent >> renderContentOn: aCanvas [
-
-	aCanvas div 
+	aCanvas div
 		class: 'header-wrapper';
 		with: [ aCanvas div
 				class: 'header-title';
 				with: [ aCanvas heading: 'CuOOra' ].
 			aCanvas div
 				class: 'header-user';
-				with: [ aCanvas paragraph: self session user usuario.
+				with: [ aCanvas anchor
+						class: 'nombre-user';
+						callback: [ self homeOfUser ];
+						with: [ aCanvas paragraph: self session user usuario ].
 					aCanvas anchor
 						class: 'a-logout';
 						callback: [ self logOut ];
