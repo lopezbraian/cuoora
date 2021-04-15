@@ -1,8 +1,34 @@
 Class {
 	#name : #PageComponent,
 	#superclass : #WAComponent,
+	#instVars : [
+		'component'
+	],
 	#category : #'Objetos2-CuOOra-UI'
 }
+
+{ #category : #'as yet unclassified' }
+PageComponent class >> withComponent: aComponent [
+
+	^ self new component: aComponent.
+]
+
+{ #category : #hooks }
+PageComponent >> children [ 
+
+^ Array with: component.
+]
+
+{ #category : #accessing }
+PageComponent >> component [ 
+	^ component.
+]
+
+{ #category : #accessing }
+PageComponent >> component: aComponent [
+
+	component:=aComponent .
+]
 
 { #category : #callback }
 PageComponent >> homeOfUser [
@@ -29,6 +55,12 @@ PageComponent >> profileOfUser: aUser [
 
 { #category : #rendering }
 PageComponent >> renderContentOn: aCanvas [
+	self renderHeader: aCanvas.
+	aCanvas render: component
+]
+
+{ #category : #rendering }
+PageComponent >> renderHeader: aCanvas [
 	aCanvas div
 		class: 'header-wrapper';
 		with: [ aCanvas div

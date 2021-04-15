@@ -1,6 +1,6 @@
 Class {
 	#name : #PageProfileComponent,
-	#superclass : #PageComponent,
+	#superclass : #WAComponent,
 	#instVars : [
 		'profile'
 	],

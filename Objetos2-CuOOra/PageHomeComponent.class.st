@@ -1,6 +1,6 @@
 Class {
 	#name : #PageHomeComponent,
-	#superclass : #PageComponent,
+	#superclass : #WAComponent,
 	#instVars : [
 		'collectionPreguntas'
 	],
@@ -20,11 +20,13 @@ PageHomeComponent >> children [
 { #category : #callback }
 PageHomeComponent >> goToDetail: aPregunta [
 
-self call:(PageEntradaDetailComponent newWithData: aPregunta)
+self session pregunta:aPregunta.
+
+self call:(PageEntradaDetailComponent new)
 ]
 
 { #category : #initialization }
-PageHomeComponent >> initialize [ 
+PageHomeComponent >> initialize [
 	super initialize .
 
 ]
@@ -78,9 +80,14 @@ aCanvas anchor
 	aCanvas horizontalRule   
 ]
 
+{ #category : #callback }
+PageHomeComponent >> profileOfUser: aUser [
+
+^self call: (PageProfileComponent newWithData: aUser )
+]
+
 { #category : #rendering }
 PageHomeComponent >> renderContentOn: aCanvas [
-	super renderContentOn: aCanvas.
 	aCanvas div
 		class: 'wrap-btn-home';
 		with: [ aCanvas anchor

@@ -3,7 +3,8 @@ Class {
 	#superclass : #WASession,
 	#instVars : [
 		'user',
-		'model'
+		'model',
+		'pregunta'
 	],
 	#category : #'Objetos2-CuOOra-UI'
 }
@@ -26,6 +27,17 @@ SessionWithUserAndModel >> model [
 SessionWithUserAndModel >> model: aModel [
 
 	model:= aModel.
+]
+
+{ #category : #accessing }
+SessionWithUserAndModel >> pregunta [
+	^pregunta
+]
+
+{ #category : #accessing }
+SessionWithUserAndModel >> pregunta:aPregunta [
+
+	pregunta:=aPregunta.
 ]
 
 { #category : #accessing }

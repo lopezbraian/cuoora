@@ -1,6 +1,6 @@
 Class {
 	#name : #PageQuestionComponent,
-	#superclass : #PageComponent,
+	#superclass : #WAComponent,
 	#instVars : [
 		'titulo',
 		'desarrollo',
