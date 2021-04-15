@@ -1,5 +1,5 @@
 Class {
-	#name : #PageQuestionComponent,
+	#name : #QuestionComponent,
 	#superclass : #WAComponent,
 	#instVars : [
 		'titulo',
@@ -10,29 +10,29 @@ Class {
 	#category : #'Objetos2-CuOOra-UI'
 }
 
-{ #category : #callback }
-PageQuestionComponent >> cancelar [
+{ #category : #callbacks }
+QuestionComponent >> cancelar [
 
 ^self answer.
 ]
 
 { #category : #'as yet unclassified' }
-PageQuestionComponent >> checkbox:aValue topic:aTopic [
+QuestionComponent >> checkbox:aValue topic:aTopic [
 	aValue ifTrue: [ topicosSelected add:aTopic ]
 ]
 
 { #category : #accessing }
-PageQuestionComponent >> desarrollo [
+QuestionComponent >> desarrollo [
 	^ desarrollo
 ]
 
 { #category : #accessing }
-PageQuestionComponent >> desarrollo: anObject [
+QuestionComponent >> desarrollo: anObject [
 	desarrollo := anObject
 ]
 
-{ #category : #callback }
-PageQuestionComponent >> guardar [
+{ #category : #callbacks }
+QuestionComponent >> guardar [
 	topicosSelected.
 	self session user
 		agregarPreguntaConTitulo: titulo
@@ -44,21 +44,19 @@ PageQuestionComponent >> guardar [
 ]
 
 { #category : #initialization }
-PageQuestionComponent >> initialize [ 
+QuestionComponent >> initialize [ 
 	super initialize .
 	topicosSelected := OrderedCollection new.
 ]
 
 { #category : #rendering }
-PageQuestionComponent >> renderContentOn: aCanvas [
-
+QuestionComponent >> renderContentOn: aCanvas [
 	super renderContentOn: aCanvas.
 	aCanvas heading: 'Nueva Pregunta'.
 	aCanvas horizontalRule.
 	aCanvas form
 		class: 'wrap-pregunta-form';
-		with: [ 
-			aCanvas paragraph: 'Título'.
+		with: [ aCanvas paragraph: 'Título'.
 			aCanvas textArea
 				on: #titulo of: self;
 				columns: 80;
@@ -75,9 +73,9 @@ PageQuestionComponent >> renderContentOn: aCanvas [
 			aCanvas paragraph: 'Topicos'.
 			CuOOra soleInstance topicos
 				do: [ :t | 
-					aCanvas  checkbox
+					aCanvas checkbox
 						value: false;
-						callback: [ :v | self checkbox: v topic:t ].
+						callback: [ :v | self checkbox: v topic: t ].
 					aCanvas text: t nombre ].
 			aCanvas break.
 			aCanvas break.
@@ -87,27 +85,25 @@ PageQuestionComponent >> renderContentOn: aCanvas [
 				callback: [ self cancelar ];
 				with: 'Cancelar' ].
 	aCanvas break
-	"aCanvas div
-		class: 'wrap-button-question';
-		with: [  ]"
+	
 ]
 
 { #category : #accessing }
-PageQuestionComponent >> titulo [
+QuestionComponent >> titulo [
 	^ titulo
 ]
 
 { #category : #accessing }
-PageQuestionComponent >> titulo: anObject [
+QuestionComponent >> titulo: anObject [
 	titulo := anObject
 ]
 
 { #category : #accessing }
-PageQuestionComponent >> topicos [
+QuestionComponent >> topicos [
 	^ topicos
 ]
 
 { #category : #accessing }
-PageQuestionComponent >> topicos: anObject [
+QuestionComponent >> topicos: anObject [
 	topicos := anObject
 ]

@@ -34,7 +34,7 @@ LoginComponent >> login [
 		ifNil: [ ^ false ]
 		ifNotNil: [ self session user: user.
 			self session model: self model.
-			^ self call: (PageComponent withComponent: PageHomeComponent new) ]
+			^ self call: (LayoutComponent withComponent: HomeComponent new) ]
 ]
 
 { #category : #model }
@@ -54,8 +54,7 @@ LoginComponent >> password: aPassword [
 
 { #category : #callback }
 LoginComponent >> registerNewUser [
-
-self call: (RegisterComponent new).
+	^ self call: (RegisterComponent new)
 ]
 
 { #category : #'as yet unclassified' }

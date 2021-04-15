@@ -10,14 +10,6 @@ Class {
 }
 
 { #category : #accessing }
-SessionWithUserAndModel >> logout [
-
-	user := nil.
-	model:= nil.
-
-]
-
-{ #category : #accessing }
 SessionWithUserAndModel >> model [
 
 	^model
@@ -27,17 +19,6 @@ SessionWithUserAndModel >> model [
 SessionWithUserAndModel >> model: aModel [
 
 	model:= aModel.
-]
-
-{ #category : #accessing }
-SessionWithUserAndModel >> pregunta [
-	^pregunta
-]
-
-{ #category : #accessing }
-SessionWithUserAndModel >> pregunta:aPregunta [
-
-	pregunta:=aPregunta.
 ]
 
 { #category : #accessing }

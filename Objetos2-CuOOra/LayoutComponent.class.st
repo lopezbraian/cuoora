@@ -1,5 +1,5 @@
 Class {
-	#name : #PageComponent,
+	#name : #LayoutComponent,
 	#superclass : #WAComponent,
 	#instVars : [
 		'component'
@@ -8,59 +8,59 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-PageComponent class >> withComponent: aComponent [
+LayoutComponent class >> withComponent: aComponent [
 
 	^ self new component: aComponent.
 ]
 
 { #category : #hooks }
-PageComponent >> children [ 
+LayoutComponent >> children [ 
 
 ^ Array with: component.
 ]
 
 { #category : #accessing }
-PageComponent >> component [ 
+LayoutComponent >> component [ 
 	^ component.
 ]
 
 { #category : #accessing }
-PageComponent >> component: aComponent [
+LayoutComponent >> component: aComponent [
 
 	component:=aComponent .
 ]
 
 { #category : #callback }
-PageComponent >> homeOfUser [
-	^ self call: (PageComponent  withComponent:PageHomeComponent new) .
+LayoutComponent >> homeOfUser [
+	^ self call: (LayoutComponent  withComponent:HomeComponent new) .
 ]
 
 { #category : #initialization }
-PageComponent >> initialize [ 
+LayoutComponent >> initialize [ 
 	super initialize.
 ]
 
 { #category : #callback }
-PageComponent >> logOut [ 
+LayoutComponent >> logOut [ 
 		^ self
 		call:
 			(LoginComponent new)
 ]
 
 { #category : #callback }
-PageComponent >> profileOfUser: aUser [
-
-^self call: (PageComponent withComponent: (PageProfileComponent newWithData: aUser) )
+LayoutComponent >> profileOfUser: aUser [
+	^ self
+		call: (LayoutComponent withComponent: (ProfileComponent newWithData: aUser))
 ]
 
 { #category : #rendering }
-PageComponent >> renderContentOn: aCanvas [
+LayoutComponent >> renderContentOn: aCanvas [
 	self renderHeader: aCanvas.
 	aCanvas render: component
 ]
 
 { #category : #rendering }
-PageComponent >> renderHeader: aCanvas [
+LayoutComponent >> renderHeader: aCanvas [
 	aCanvas div
 		class: 'header-wrapper';
 		with: [ aCanvas div
@@ -83,7 +83,7 @@ PageComponent >> renderHeader: aCanvas [
 ]
 
 { #category : #hooks }
-PageComponent >> style [ 
+LayoutComponent >> style [ 
 
 ^'
 html {  

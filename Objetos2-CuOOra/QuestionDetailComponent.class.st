@@ -14,11 +14,11 @@ QuestionDetailComponent class >> parent: aComponent question: aPregunta [
 ^self new parent: aComponent ; question: aPregunta ;yourself
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #rendering }
 QuestionDetailComponent >> calificacion: aCanvas [
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #rendering }
 QuestionDetailComponent >> infoPregunta: aCanvas [
 
 aCanvas span: 'Realizada por '.

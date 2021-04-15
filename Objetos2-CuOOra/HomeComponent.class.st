@@ -1,5 +1,5 @@
 Class {
-	#name : #PageHomeComponent,
+	#name : #HomeComponent,
 	#superclass : #WAComponent,
 	#instVars : [
 		'collectionPreguntas',
@@ -9,41 +9,41 @@ Class {
 }
 
 { #category : #callback }
-PageHomeComponent >> agregarNuevaPregunta [
-	self call: (PageQuestionComponent new)
+HomeComponent >> agregarNuevaPregunta [
+	self call: (QuestionComponent new)
 ]
 
 { #category : #hooks }
-PageHomeComponent >> children [
+HomeComponent >> children [
 	^ Array with: (BtnComponent withContent: 'Agregar Nueva Pregunta')
 ]
 
 { #category : #callback }
-PageHomeComponent >> goToDetail: aPregunta [
+HomeComponent >> goToDetail: aPregunta [
 
 
-self call:(PageEntradaDetailComponent withData: aPregunta)
+self call:(EntradaDetailComponent withData: aPregunta)
 ]
 
 { #category : #initialization }
-PageHomeComponent >> initialize [
+HomeComponent >> initialize [
 	super initialize .
 
 ]
 
 { #category : #accessing }
-PageHomeComponent >> model [ 
+HomeComponent >> model [ 
 	^ CuOOra soleInstance .
 ]
 
 { #category : #callback }
-PageHomeComponent >> profileOfUser: aUser [
+HomeComponent >> profileOfUser: aUser [
 
-^self call: (PageProfileComponent newWithData: aUser )
+^self call: (ProfileComponent newWithData: aUser )
 ]
 
 { #category : #rendering }
-PageHomeComponent >> renderContentOn: aCanvas [
+HomeComponent >> renderContentOn: aCanvas [
 	aCanvas div
 		class: 'wrap-btn-home';
 		with: [ aCanvas anchor
@@ -56,7 +56,7 @@ PageHomeComponent >> renderContentOn: aCanvas [
 ]
 
 { #category : #rendering }
-PageHomeComponent >> renderFeed: aCanvas [
+HomeComponent >> renderFeed: aCanvas [
 	collectionPreguntas := CuOOra soleInstance
 		obtenerPreguntasRelevantesPara: self session user.
 	aCanvas

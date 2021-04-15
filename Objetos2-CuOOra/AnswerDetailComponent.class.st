@@ -62,31 +62,8 @@ AnswerDetailComponent >> parent: anObject [
 
 { #category : #rendering }
 AnswerDetailComponent >> renderContentOn: aCanvas [
-	aCanvas
-		listItem: [ aCanvas
-				render: [ aCanvas span: 'Respuesta de '.
-					aCanvas anchor
-						class: 'nombre-user';
-						callback: [ parent profileOfUser: respuesta user ];
-						with: respuesta user usuario.
-					aCanvas text: ' '.
-					aCanvas paragraph: respuesta content.
-					aCanvas
-						paragraph: [ aCanvas text: respuesta likes.
-							aCanvas text: ' Likes '.
-							aCanvas text: ' | '.
-							aCanvas text: respuesta dislikes.
-							aCanvas text: ' Dislike ' ].
-					aCanvas anchor
-						class: 'btn-calif';
-						callback: [ self session user agregarCalificacion: true aEntrada: respuesta ];
-						with: 'like'.
-					aCanvas span: '| '.
-					aCanvas anchor
-						class: 'btn-calif';
-						callback: [ self session user agregarCalificacion: false aEntrada: respuesta ];
-						with: 'dislike'.
-					aCanvas horizontalRule ] ]
+	self infoRespuesta: aCanvas .
+	self calificacion: aCanvas .
 ]
 
 { #category : #accessing }
