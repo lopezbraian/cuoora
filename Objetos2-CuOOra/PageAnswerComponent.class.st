@@ -2,7 +2,7 @@ Class {
 	#name : #PageAnswerComponent,
 	#superclass : #PageComponent,
 	#instVars : [
-		'entrada',
+		'data',
 		'respuesta'
 	],
 	#category : #'Objetos2-CuOOra-UI'
@@ -11,7 +11,7 @@ Class {
 { #category : #'instance creation' }
 PageAnswerComponent class >> newWithData: data [ 
 
-^self new entrada: data; yourself . 
+^self new data: data; yourself . 
 ]
 
 { #category : #callback }
@@ -21,20 +21,21 @@ self answer.
 ]
 
 { #category : #accessing }
-PageAnswerComponent >> entrada [
-	^ entrada
+PageAnswerComponent >> data [
+	^ data
 ]
 
 { #category : #accessing }
-PageAnswerComponent >> entrada: anObject [
-	entrada := anObject
+PageAnswerComponent >> data: anObject [
+data := anObject
 ]
 
 { #category : #callback }
 PageAnswerComponent >> guardar [
-
-self session user agregarRespuestaAPregunta: entrada contenido: respuesta.
-self answer .
+	self session user
+		agregarRespuestaAPregunta: data
+		contenido: respuesta.
+	self answer
 ]
 
 { #category : #initialization }
@@ -48,39 +49,38 @@ self respuesta: 'Escriba su respuesta aquí'
 PageAnswerComponent >> pregunta: aCanvas [
 	aCanvas paragraph
 		class: 'title-pregunta';
-		with: entrada titulo
-		.
+		with: data titulo.
 	aCanvas paragraph
 		class: 'topico';
 		with: [ aCanvas text: 'Tópicos: '.
 			aCanvas
-				span: [ entrada topicos
+				span: [ data topicos
 						do: [ :t | 
 							aCanvas text: t nombre.
 							aCanvas text: ' / ' ] ] ].
 	aCanvas span: 'Realizada por '.
 	aCanvas anchor
 		class: 'nombre-user';
-		callback: [ self profileOfUser: entrada user ];
-		with: entrada user usuario.
+		callback: [ self profileOfUser: data user ];
+		with: data user usuario.
 	aCanvas
 		span: [ aCanvas text: ' | '.
-			aCanvas text: entrada respuestas size.
+			aCanvas text: data respuestas size.
 			aCanvas text: ' respuestas ' ].
 	aCanvas
-		paragraph: [ aCanvas text: entrada likes.
+		paragraph: [ aCanvas text: data likes.
 			aCanvas text: ' Likes '.
 			aCanvas text: ' | '.
-			aCanvas text: entrada dislikes.
+			aCanvas text: data dislikes.
 			aCanvas text: ' Dislike ' ].
 	aCanvas anchor
 		class: 'btn-calif';
-		callback: [ self session user agregarCalificacion: true aEntrada:  entrada ];
+		callback: [ self session user agregarCalificacion: true aEntrada: data ];
 		with: 'like'.
 	aCanvas span: '| '.
 	aCanvas anchor
 		class: 'btn-calif';
-		callback: [ self session user agregarCalificacion: false aEntrada:  entrada ];
+		callback: [ self session user agregarCalificacion: false aEntrada: data ];
 		with: 'dislike'.
 	aCanvas horizontalRule
 ]

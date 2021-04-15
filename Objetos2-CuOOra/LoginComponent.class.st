@@ -1,7 +1,7 @@
 "
 | application |
-application := WAAdmin register: LoginComponent asApplicationAt: 'simple-net'.
-application sessionClass: SessionWithUser.
+application := WAAdmin register: LoginComponent asApplicationAt: 'login'.
+application sessionClass: SessionWithUserAndModel.
 
 "
 Class {

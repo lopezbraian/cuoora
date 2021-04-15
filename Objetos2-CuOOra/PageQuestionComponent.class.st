@@ -38,7 +38,7 @@ PageQuestionComponent >> guardar [
 		agregarPreguntaConTitulo: titulo
 		Descripcion: desarrollo
 		Topicos: topicosSelected.
-	^ self call: PageQuestionComponent new.
+	topicosSelected removeAll.
 ]
 
 { #category : #initialization }

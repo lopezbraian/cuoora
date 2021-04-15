@@ -62,9 +62,6 @@ CuOOra >> dataTest [
 		conPass: 'juan@cuoora.com'.
 	juan serFollowerDe: diego.
 	pedro serFollowerDe: juan.
-	diego serFollowerDe: pedro.
-	
-	
 	OO1 := self
 		agregarTopico: 'OO1'
 		conDescripcion: 'Orientacion a objetos 1'.
@@ -75,9 +72,7 @@ CuOOra >> dataTest [
 	topiclist := OrderedCollection new.
 	topiclist add: tu.
 	topiclist add: OO1.
-	
-	pedro agregarTopicoDeInteres: smalltalk.
-	p  := pedro
+		p := pedro
 		agregarPreguntaConTitulo: '¿Para qué sirve el método SetUp?'
 		Descripcion: 'Para qué sirve el método Set Up en un test???'
 		Topicos: topiclist.
@@ -163,9 +158,9 @@ CuOOra >> puntajeDe: aUsuario [
 
 { #category : #'as yet unclassified' }
 CuOOra >> respuestasDe: aUsuario [
-	"tiene que considerar las respuestas a sus propias preguntas?????"
 
-	^ (usuarios reject: [:u | u ==aUsuario])flatCollect: [ :u | u obtenerRespuestasDe: aUsuario ].
+	^ (usuarios reject: [ :u | u == aUsuario ])
+		flatCollect: [ :u | u obtenerRespuestasDe: aUsuario ]
 ]
 
 { #category : #accessing }

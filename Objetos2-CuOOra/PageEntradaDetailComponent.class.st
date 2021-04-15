@@ -2,7 +2,7 @@ Class {
 	#name : #PageEntradaDetailComponent,
 	#superclass : #PageComponent,
 	#instVars : [
-		'entrada',
+		'data',
 		'btnComponent'
 	],
 	#classInstVars : [
@@ -13,23 +13,22 @@ Class {
 
 { #category : #'instance creation' }
 PageEntradaDetailComponent class >> newWithData: aData [
-	^ self new entrada: aData yourself
+	^ self new data: aData yourself
 ]
 
-{ #category : #initialization }
+{ #category : #hooks }
 PageEntradaDetailComponent >> children [ 
-
-^ Array with: btnComponent .
+^Array with: btnComponent 
 ]
 
 { #category : #accessing }
-PageEntradaDetailComponent >> entrada [
-	^ entrada
+PageEntradaDetailComponent >> data [
+	^ data
 ]
 
 { #category : #accessing }
-PageEntradaDetailComponent >> entrada: anObject [
-	entrada := anObject
+PageEntradaDetailComponent >> data: anObject [
+	data := anObject
 ]
 
 { #category : #initialization }
@@ -39,49 +38,47 @@ PageEntradaDetailComponent >> initialize [
 	btnComponent := BtnComponent withContent: 'Agregar Respuesta'.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #callbacks }
 PageEntradaDetailComponent >> nuevaRespuesta [
-
-self call: (PageAnswerComponent newWithData: entrada).
+	self call: (PageAnswerComponent newWithData: data)
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #rendering }
 PageEntradaDetailComponent >> pregunta: aCanvas [
 	aCanvas paragraph
 		class: 'title-pregunta';
-		with: entrada titulo
-		.
+		with: data titulo.
 	aCanvas paragraph
 		class: 'topico';
 		with: [ aCanvas text: 'Tópicos: '.
 			aCanvas
-				span: [ entrada topicos
+				span: [ data topicos
 						do: [ :t | 
 							aCanvas text: t nombre.
 							aCanvas text: ' / ' ] ] ].
 	aCanvas span: 'Realizada por '.
 	aCanvas anchor
 		class: 'nombre-user';
-		callback: [ self profileOfUser: entrada user ];
-		with: entrada user usuario.
+		callback: [ self profileOfUser: data user ];
+		with: data user usuario.
 	aCanvas
 		span: [ aCanvas text: ' | '.
-			aCanvas text: entrada respuestas size.
+			aCanvas text: data respuestas size.
 			aCanvas text: ' respuestas ' ].
 	aCanvas
-		paragraph: [ aCanvas text: entrada likes.
+		paragraph: [ aCanvas text: data likes.
 			aCanvas text: ' Likes '.
 			aCanvas text: ' | '.
-			aCanvas text: entrada dislikes.
+			aCanvas text: data dislikes.
 			aCanvas text: ' Dislike ' ].
 	aCanvas anchor
 		class: 'btn-calif';
-		callback: [ self session user agregarCalificacion: true aEntrada:  entrada ];
+		callback: [ self session user agregarCalificacion: true aEntrada: data ];
 		with: 'like'.
 	aCanvas span: '| '.
 	aCanvas anchor
 		class: 'btn-calif';
-		callback: [ self session user agregarCalificacion: false aEntrada:  entrada ];
+		callback: [ self session user agregarCalificacion: false aEntrada: data ];
 		with: 'dislike'.
 	aCanvas horizontalRule
 ]
@@ -102,10 +99,10 @@ PageEntradaDetailComponent >> renderContentOn: aCanvas [
 				with: [ aCanvas render: btnComponent ] ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #rendering }
 PageEntradaDetailComponent >> respuestas: aCanvas [
 	aCanvas
-		unorderedList: [ entrada respuestas
+		unorderedList: [ data respuestas
 				do: [ :each | 
 					aCanvas
 						listItem: [ aCanvas
@@ -115,7 +112,7 @@ PageEntradaDetailComponent >> respuestas: aCanvas [
 										callback: [ self profileOfUser: each user ];
 										with: each user usuario.
 									aCanvas text: ' '.
-									aCanvas paragraph with: each content.
+									aCanvas paragraph: each content.
 									aCanvas
 										paragraph: [ aCanvas text: each likes.
 											aCanvas text: ' Likes '.

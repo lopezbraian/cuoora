@@ -1,10 +1,6 @@
 Class {
 	#name : #PageComponent,
 	#superclass : #WAComponent,
-	#instVars : [
-		'username',
-		'password'
-	],
 	#category : #'Objetos2-CuOOra-UI'
 }
 

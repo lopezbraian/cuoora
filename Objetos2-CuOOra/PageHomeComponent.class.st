@@ -91,35 +91,10 @@ PageHomeComponent >> renderContentOn: aCanvas [
 PageHomeComponent >> renderFeed: aCanvas [
 	collectionPreguntas := CuOOra soleInstance
 		obtenerPreguntasRelevantesPara: self session user.
-	
 	aCanvas
-		unorderedList: [ collectionPreguntas
-				do: [ :each | 
+		unorderedList: [ (collectionPreguntas size > 5 ) ifTrue: [(collectionPreguntas first: 5)
+				asSortedCollection: [ :p1 :p2 | p1 fecha <= p2 fecha ]].
+		collectionPreguntas do: [ :each | 
 					aCanvas
 						listItem: [ aCanvas render: [ self pregunta: each en: aCanvas ] ] ] ]
-]
-
-{ #category : #rendering }
-PageHomeComponent >> renderFriendsOn: aCanvas [
-	aCanvas heading
-		level: 2;
-		with: 'Friends'.
-	aCanvas
-		unorderedList: [ self session user friends do: [ :each | aCanvas listItem: each name ] ].
-	aCanvas anchor
-		callback: [ self findFriend ];
-		with: [ aCanvas button: 'Find friends' ]
-]
-
-{ #category : #rendering }
-PageHomeComponent >> renderPostsOn: aCanvas [
-	aCanvas heading
-		level: 2;
-		with: 'Posts'.
-	aCanvas
-		unorderedList: [ self session user postsInNetwork
-				do: [ :each | aCanvas listItem: each text ] ].
-	aCanvas anchor
-		callback: [ self createNewPost ];
-		with: [ aCanvas button: 'New post' ]
 ]
