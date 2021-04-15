@@ -11,7 +11,7 @@ Class {
 { #category : #'as yet unclassified' }
 AnswerDetailComponent class >> parent: aComponent answer: aRespuesta [
 
-^self new parent: aComponent ; answer: aRespuesta ; yourself 
+^self new parent: aComponent ; respuesta: aRespuesta ; yourself 
 ]
 
 { #category : #'as yet unclassified' }

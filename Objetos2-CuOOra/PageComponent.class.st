@@ -32,7 +32,7 @@ PageComponent >> component: aComponent [
 
 { #category : #callback }
 PageComponent >> homeOfUser [
-	^ self call: PageHomeComponent new
+	^ self call: (PageComponent  withComponent:PageHomeComponent new) .
 ]
 
 { #category : #initialization }
@@ -50,7 +50,7 @@ PageComponent >> logOut [
 { #category : #callback }
 PageComponent >> profileOfUser: aUser [
 
-^self call: (PageProfileComponent newWithData: aUser )
+^self call: (PageComponent withComponent: (PageProfileComponent newWithData: aUser) )
 ]
 
 { #category : #rendering }

@@ -92,7 +92,6 @@ PageProfileComponent >> profile: anObject [
 
 { #category : #rendering }
 PageProfileComponent >> renderContentOn: aCanvas [
-	super renderContentOn: aCanvas.
 	aCanvas span
 		class: 'title';
 		with: [ aCanvas text: 'Preguntas de '.

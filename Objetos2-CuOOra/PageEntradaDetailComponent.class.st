@@ -3,13 +3,19 @@ Class {
 	#superclass : #WAComponent,
 	#instVars : [
 		'btnComponent',
-		'pregunta'
+		'pregunta',
+		'data'
 	],
 	#classInstVars : [
 		'data'
 	],
 	#category : #'Objetos2-CuOOra-UI'
 }
+
+{ #category : #'as yet unclassified' }
+PageEntradaDetailComponent class >> withData: aData [
+^ self new data:aData; yourself.
+]
 
 { #category : #hooks }
 PageEntradaDetailComponent >> children [ 
@@ -38,22 +44,14 @@ PageEntradaDetailComponent >> nuevaRespuesta [
 	self call: (PageAnswerComponent newWithData: data)
 ]
 
-{ #category : #rendering }
-PageEntradaDetailComponent >> pregunta [
+{ #category : #callback }
+PageEntradaDetailComponent >> profileOfUser: aUser [
 
-	^pregunta
-]
-
-{ #category : #rendering }
-PageEntradaDetailComponent >> pregunta:aPregunta [
-
-	pregunta:=aPregunta.
+^self call: (PageProfileComponent newWithData: aUser )
 ]
 
 { #category : #rendering }
 PageEntradaDetailComponent >> renderContentOn: aCanvas [
-
-	self pregunta: self session pregunta.
 	
 	self renderPregunta: aCanvas.
 	self renderRespuestas: aCanvas.
@@ -72,39 +70,39 @@ PageEntradaDetailComponent >> renderContentOn: aCanvas [
 PageEntradaDetailComponent >> renderPregunta: aCanvas [
 	aCanvas paragraph
 		class: 'title-pregunta';
-		with: pregunta titulo.
+		with: data titulo.
 	aCanvas paragraph
 		class: 'topico';
 		with: [ aCanvas text: 'Tópicos: '.
 			aCanvas
-				span: [ pregunta topicos
+				span: [ data topicos
 						do: [ :t | 
 							aCanvas text: t nombre.
 							aCanvas text: ' / ' ] ] ].
-	aCanvas span: pregunta descr.
+	aCanvas span: data descr.
 	aCanvas span: 'Realizada por '.
 	aCanvas anchor
 		class: 'nombre-user';
-		callback: [ self profileOfUser: pregunta user ];
-		with: pregunta user usuario.
+		callback: [ self profileOfUser: data user ];
+		with: data user usuario.
 	aCanvas
 		span: [ aCanvas text: ' | '.
-			aCanvas text: pregunta respuestas size.
+			aCanvas text: data respuestas size.
 			aCanvas text: ' respuestas ' ].
 	aCanvas
-		paragraph: [ aCanvas text: pregunta likes.
+		paragraph: [ aCanvas text: data likes.
 			aCanvas text: ' Likes '.
 			aCanvas text: ' | '.
-			aCanvas text: pregunta dislikes.
+			aCanvas text: data dislikes.
 			aCanvas text: ' Dislike ' ].
 	aCanvas anchor
 		class: 'btn-calif';
-		callback: [ self session user agregarCalificacion: true aEntrada: pregunta ];
+		callback: [ self session user agregarCalificacion: true aEntrada: data ];
 		with: 'like'.
 	aCanvas span: '| '.
 	aCanvas anchor
 		class: 'btn-calif';
-		callback: [ self session user agregarCalificacion: false aEntrada: pregunta ];
+		callback: [ self session user agregarCalificacion: false aEntrada: data ];
 		with: 'dislike'.
 	aCanvas horizontalRule
 ]
@@ -112,31 +110,7 @@ PageEntradaDetailComponent >> renderPregunta: aCanvas [
 { #category : #rendering }
 PageEntradaDetailComponent >> renderRespuestas: aCanvas [
 	aCanvas
-		unorderedList: [ pregunta respuestas
-				do: [ :each | 
-					aCanvas
-						listItem: [ aCanvas
-								render: [ aCanvas span: 'Respuesta de '.
-									aCanvas anchor
-										class: 'nombre-user';
-										callback: [ self profileOfUser: each user ];
-										with: each user usuario.
-									aCanvas text: ' '.
-									aCanvas paragraph: each content.
-									aCanvas
-										paragraph: [ aCanvas text: each likes.
-											aCanvas text: ' Likes '.
-											aCanvas text: ' | '.
-											aCanvas text: each dislikes.
-											aCanvas text: ' Dislike ' ].
-									aCanvas anchor
-										class: 'btn-calif';
-										callback: [ self session user agregarCalificacion: true aEntrada: each ];
-										with: 'like'.
-									aCanvas span: '| '.
-									aCanvas anchor
-										class: 'btn-calif';
-										callback: [ self session user agregarCalificacion: false aEntrada: each ];
-										with: 'dislike'.
-									aCanvas horizontalRule ] ] ] ]
+		unorderedList: [ data respuestas
+				do: [ :each | aCanvas render: (AnswerDetailComponent parent: self answer: each )
+					 ] ]
 ]

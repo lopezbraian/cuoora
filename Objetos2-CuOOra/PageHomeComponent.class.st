@@ -2,7 +2,8 @@ Class {
 	#name : #PageHomeComponent,
 	#superclass : #WAComponent,
 	#instVars : [
-		'collectionPreguntas'
+		'collectionPreguntas',
+		'pregunta'
 	],
 	#category : #'Objetos2-CuOOra-UI'
 }
@@ -20,9 +21,8 @@ PageHomeComponent >> children [
 { #category : #callback }
 PageHomeComponent >> goToDetail: aPregunta [
 
-self session pregunta:aPregunta.
 
-self call:(PageEntradaDetailComponent new)
+self call:(PageEntradaDetailComponent withData: aPregunta)
 ]
 
 { #category : #initialization }
@@ -34,50 +34,6 @@ PageHomeComponent >> initialize [
 { #category : #accessing }
 PageHomeComponent >> model [ 
 	^ CuOOra soleInstance .
-]
-
-{ #category : #'as yet unclassified' }
-PageHomeComponent >> pregunta: aPregunta en: aCanvas [
-
-aCanvas anchor
-		callback: [ self goToDetail: aPregunta ];
-		class: 'pregunta';
-		with: [ aCanvas paragraph
-				with: aPregunta titulo;
-				class: 'title-pregunta' ].
-	aCanvas paragraph
-		class: 'topico';
-		with: [ aCanvas text: 'Tópicos: '.
-			aCanvas
-				span: [ aPregunta topicos
-						do: [ :t | 
-							aCanvas text: t nombre.
-							aCanvas text: ' / ' ] ] ].
-	aCanvas span: 'Realizada por '.
-	aCanvas anchor
-		class: 'nombre-user';
-		callback: [ self profileOfUser: aPregunta user ];
-		with: aPregunta user usuario.
-	aCanvas
-		span: [ aCanvas text: ' | '.
-			aCanvas text: aPregunta respuestas size.
-			aCanvas text: ' respuestas ' ].
-	aCanvas
-		paragraph: [ aCanvas text: aPregunta likes.
-			aCanvas text: ' Likes '.
-			aCanvas text: ' | '.
-			aCanvas text: aPregunta dislikes.
-			aCanvas text: ' Dislike ' ].
-	aCanvas anchor
-		class: 'btn-calif';
-		callback: [ self session user agregarCalificacion: true aEntrada:  aPregunta  ];
-		with: 'like'.
-	aCanvas span: '| '.
-	aCanvas anchor
-		class: 'btn-calif';
-		callback: [ self session user agregarCalificacion: false aEntrada:  aPregunta ];
-		with: 'dislike'.
-	aCanvas horizontalRule   
 ]
 
 { #category : #callback }
@@ -108,5 +64,5 @@ PageHomeComponent >> renderFeed: aCanvas [
 				asSortedCollection: [ :p1 :p2 | p1 fecha <= p2 fecha ]].
 		collectionPreguntas do: [ :each | 
 					aCanvas
-						listItem: [ aCanvas render: [ self pregunta: each en: aCanvas ] ] ] ]
+						listItem: [ aCanvas render: ( QuestionDetailComponent parent:self question: each ) ] ] ]
 ]

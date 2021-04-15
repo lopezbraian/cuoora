@@ -87,7 +87,6 @@ PageAnswerComponent >> pregunta: aCanvas [
 
 { #category : #rendering }
 PageAnswerComponent >> renderContentOn: aCanvas [
-	super renderContentOn: aCanvas.
 	self pregunta: aCanvas.
 	aCanvas div
 		class: 'container-respuesta';
