@@ -32,7 +32,7 @@ LayoutComponent >> component: aComponent [
 
 { #category : #callback }
 LayoutComponent >> homeOfUser [
-	^ self call: (LayoutComponent  withComponent:HomeComponent new) .
+	^ self call: (LayoutComponent  withComponent:PageHomeComponent new) .
 ]
 
 { #category : #initialization }
@@ -44,13 +44,13 @@ LayoutComponent >> initialize [
 LayoutComponent >> logOut [ 
 		^ self
 		call:
-			(LoginComponent new)
+			(PageLoginComponent new)
 ]
 
 { #category : #callback }
 LayoutComponent >> profileOfUser: aUser [
 	^ self
-		call: (LayoutComponent withComponent: (ProfileComponent newWithData: aUser))
+		call: (LayoutComponent withComponent: (PageProfileComponent newWithData: aUser))
 ]
 
 { #category : #rendering }
