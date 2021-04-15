@@ -12,6 +12,11 @@ PageHomeComponent >> agregarNuevaPregunta [
 	self call: (PageQuestionComponent new)
 ]
 
+{ #category : #hooks }
+PageHomeComponent >> children [
+	^ Array with: (BtnComponent withContent: 'Agregar Nueva Pregunta')
+]
+
 { #category : #callback }
 PageHomeComponent >> goToDetail: aPregunta [
 
