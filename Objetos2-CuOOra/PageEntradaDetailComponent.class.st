@@ -56,6 +56,7 @@ PageEntradaDetailComponent >> pregunta: aCanvas [
 						do: [ :t | 
 							aCanvas text: t nombre.
 							aCanvas text: ' / ' ] ] ].
+	aCanvas span: data descr.
 	aCanvas span: 'Realizada por '.
 	aCanvas anchor
 		class: 'nombre-user';

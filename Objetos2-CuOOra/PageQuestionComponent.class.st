@@ -38,6 +38,8 @@ PageQuestionComponent >> guardar [
 		agregarPreguntaConTitulo: titulo
 		Descripcion: desarrollo
 		Topicos: topicosSelected.
+	titulo := ' '.
+	desarrollo:= ' '.	
 	topicosSelected removeAll.
 ]
 

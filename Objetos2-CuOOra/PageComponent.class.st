@@ -33,12 +33,15 @@ PageComponent >> renderContentOn: aCanvas [
 		class: 'header-wrapper';
 		with: [ aCanvas div
 				class: 'header-title';
-				with: [ aCanvas heading: 'CuOOra' ].
+				with: [ aCanvas anchor
+						class: 'nombre-user';
+						callback: [ self homeOfUser ];
+						with: [ aCanvas heading: 'CuOOra' ] ].
 			aCanvas div
 				class: 'header-user';
 				with: [ aCanvas anchor
 						class: 'nombre-user';
-						callback: [ self homeOfUser ];
+						callback: [ self profileOfUser: self session user ];
 						with: [ aCanvas paragraph: self session user usuario ].
 					aCanvas anchor
 						class: 'a-logout';
