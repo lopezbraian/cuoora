@@ -1,20 +1,15 @@
 Class {
 	#name : #PageEntradaDetailComponent,
-	#superclass : #PageComponent,
+	#superclass : #WAComponent,
 	#instVars : [
-		'data',
-		'btnComponent'
+		'btnComponent',
+		'pregunta'
 	],
 	#classInstVars : [
 		'data'
 	],
 	#category : #'Objetos2-CuOOra-UI'
 }
-
-{ #category : #'instance creation' }
-PageEntradaDetailComponent class >> newWithData: aData [
-	^ self new data: aData yourself
-]
 
 { #category : #hooks }
 PageEntradaDetailComponent >> children [ 
@@ -44,51 +39,24 @@ PageEntradaDetailComponent >> nuevaRespuesta [
 ]
 
 { #category : #rendering }
-PageEntradaDetailComponent >> pregunta: aCanvas [
-	aCanvas paragraph
-		class: 'title-pregunta';
-		with: data titulo.
-	aCanvas paragraph
-		class: 'topico';
-		with: [ aCanvas text: 'Tópicos: '.
-			aCanvas
-				span: [ data topicos
-						do: [ :t | 
-							aCanvas text: t nombre.
-							aCanvas text: ' / ' ] ] ].
-	aCanvas span: data descr.
-	aCanvas span: 'Realizada por '.
-	aCanvas anchor
-		class: 'nombre-user';
-		callback: [ self profileOfUser: data user ];
-		with: data user usuario.
-	aCanvas
-		span: [ aCanvas text: ' | '.
-			aCanvas text: data respuestas size.
-			aCanvas text: ' respuestas ' ].
-	aCanvas
-		paragraph: [ aCanvas text: data likes.
-			aCanvas text: ' Likes '.
-			aCanvas text: ' | '.
-			aCanvas text: data dislikes.
-			aCanvas text: ' Dislike ' ].
-	aCanvas anchor
-		class: 'btn-calif';
-		callback: [ self session user agregarCalificacion: true aEntrada: data ];
-		with: 'like'.
-	aCanvas span: '| '.
-	aCanvas anchor
-		class: 'btn-calif';
-		callback: [ self session user agregarCalificacion: false aEntrada: data ];
-		with: 'dislike'.
-	aCanvas horizontalRule
+PageEntradaDetailComponent >> pregunta [
+
+	^pregunta
+]
+
+{ #category : #rendering }
+PageEntradaDetailComponent >> pregunta:aPregunta [
+
+	pregunta:=aPregunta.
 ]
 
 { #category : #rendering }
 PageEntradaDetailComponent >> renderContentOn: aCanvas [
-	super renderContentOn: aCanvas.
-	self pregunta: aCanvas.
-	self respuestas: aCanvas.
+
+	self pregunta: self session pregunta.
+	
+	self renderPregunta: aCanvas.
+	self renderRespuestas: aCanvas.
 	aCanvas paragraph
 		class: 'center';
 		with: 'No hay más respuestas'.
@@ -101,9 +69,50 @@ PageEntradaDetailComponent >> renderContentOn: aCanvas [
 ]
 
 { #category : #rendering }
-PageEntradaDetailComponent >> respuestas: aCanvas [
+PageEntradaDetailComponent >> renderPregunta: aCanvas [
+	aCanvas paragraph
+		class: 'title-pregunta';
+		with: pregunta titulo.
+	aCanvas paragraph
+		class: 'topico';
+		with: [ aCanvas text: 'Tópicos: '.
+			aCanvas
+				span: [ pregunta topicos
+						do: [ :t | 
+							aCanvas text: t nombre.
+							aCanvas text: ' / ' ] ] ].
+	aCanvas span: pregunta descr.
+	aCanvas span: 'Realizada por '.
+	aCanvas anchor
+		class: 'nombre-user';
+		callback: [ self profileOfUser: pregunta user ];
+		with: pregunta user usuario.
 	aCanvas
-		unorderedList: [ data respuestas
+		span: [ aCanvas text: ' | '.
+			aCanvas text: pregunta respuestas size.
+			aCanvas text: ' respuestas ' ].
+	aCanvas
+		paragraph: [ aCanvas text: pregunta likes.
+			aCanvas text: ' Likes '.
+			aCanvas text: ' | '.
+			aCanvas text: pregunta dislikes.
+			aCanvas text: ' Dislike ' ].
+	aCanvas anchor
+		class: 'btn-calif';
+		callback: [ self session user agregarCalificacion: true aEntrada: pregunta ];
+		with: 'like'.
+	aCanvas span: '| '.
+	aCanvas anchor
+		class: 'btn-calif';
+		callback: [ self session user agregarCalificacion: false aEntrada: pregunta ];
+		with: 'dislike'.
+	aCanvas horizontalRule
+]
+
+{ #category : #rendering }
+PageEntradaDetailComponent >> renderRespuestas: aCanvas [
+	aCanvas
+		unorderedList: [ pregunta respuestas
 				do: [ :each | 
 					aCanvas
 						listItem: [ aCanvas

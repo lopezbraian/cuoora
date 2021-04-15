@@ -34,7 +34,7 @@ LoginComponent >> login [
 		ifNil: [ ^ false ]
 		ifNotNil: [ self session user: user.
 			self session model: self model.
-			^ self call: (PageHomeComponent new ) ]
+			^ self call: (PageComponent withComponent: PageHomeComponent new) ]
 ]
 
 { #category : #model }

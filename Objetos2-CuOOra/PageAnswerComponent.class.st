@@ -1,6 +1,6 @@
 Class {
 	#name : #PageAnswerComponent,
-	#superclass : #PageComponent,
+	#superclass : #WAComponent,
 	#instVars : [
 		'data',
 		'respuesta'
