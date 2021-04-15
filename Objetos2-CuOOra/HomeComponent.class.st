@@ -2,8 +2,7 @@ Class {
 	#name : #HomeComponent,
 	#superclass : #WAComponent,
 	#instVars : [
-		'collectionPreguntas',
-		'pregunta'
+		'collectionPreguntas'
 	],
 	#category : #'Objetos2-CuOOra-UI'
 }

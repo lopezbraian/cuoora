@@ -50,11 +50,6 @@ super initialize .
 self respuesta: 'Escriba su respuesta aquí'
 ]
 
-{ #category : #'as yet unclassified' }
-AnswerComponent >> pregunta: aCanvas [
-	aCanvas render: (QuestionDetailComponent parent: self question: data)
-]
-
 { #category : #callback }
 AnswerComponent >> profileOfUser: aUser [
 	^ self call: (ProfileComponent newWithData: aUser)
@@ -62,7 +57,7 @@ AnswerComponent >> profileOfUser: aUser [
 
 { #category : #rendering }
 AnswerComponent >> renderContentOn: aCanvas [
-	self pregunta: aCanvas.
+	aCanvas render: (QuestionDetailComponent parent: self question: data).
 	aCanvas div
 		class: 'container-respuesta';
 		with: [ aCanvas paragraph: 'RESPONDER '.
